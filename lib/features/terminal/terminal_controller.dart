@@ -211,17 +211,16 @@ class TerminalController extends ChangeNotifier {
       final matches = registry.matchPrefix(prefix);
 
       if (matches.isNotEmpty) {
-        _suggestions = matches;
         _currentInput = input;
-        _suggestionIndex = 0;
         final match = matches[0];
         if (match.length > input.length) {
+          _suggestions = matches;
+          _suggestionIndex = 0;
           return match.substring(input.length);
         }
         return null;
       }
 
-      _suggestions = [];
       return null;
     }
 
@@ -241,16 +240,15 @@ class TerminalController extends ChangeNotifier {
         .toList();
 
     if (fileMatches.isEmpty) {
-      _suggestions = [];
       return null;
     }
 
-    _suggestions = fileMatches;
     _currentInput = input;
-    _suggestionIndex = 0;
 
     final fullMatch = '$cmd ${fileMatches[0]}';
     if (fullMatch.length > input.length) {
+      _suggestions = fileMatches;
+      _suggestionIndex = 0;
       return fullMatch.substring(input.length);
     }
     return null;

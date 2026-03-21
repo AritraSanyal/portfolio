@@ -19,6 +19,8 @@ class LoadingState {
   final Color fillColor;
   final double scaleZoom;
   final double overlayOpacity;
+  final bool isReady;
+  final double skipHintOpacity;
 
   const LoadingState({
     required this.phase,
@@ -34,6 +36,8 @@ class LoadingState {
     required this.fillColor,
     required this.scaleZoom,
     required this.overlayOpacity,
+    required this.isReady,
+    required this.skipHintOpacity,
   });
 }
 
@@ -51,7 +55,9 @@ class LoadingController {
 
   static double _clamp(double v) => v.clamp(0.0, 1.0);
 
-  static LoadingState compute(double t) {
+  static LoadingState compute(double t, {bool isReady = false}) {
+    final skipHintOpacity = t >= 0.33 ? _clamp((t - 0.33) / 0.17) : 0.0;
+
     // Phase 1: Boot (0.0 to 0.25)
     if (t < 0.25) {
       final local = _clamp(t / 0.25);
@@ -69,6 +75,8 @@ class LoadingController {
         fillColor: GruvboxColors.green,
         scaleZoom: 1.0,
         overlayOpacity: 0.0,
+        isReady: isReady,
+        skipHintOpacity: skipHintOpacity,
       );
     }
 
@@ -93,13 +101,16 @@ class LoadingController {
         fillColor: GruvboxColors.yellow,
         scaleZoom: 1.0,
         overlayOpacity: 0.0,
+        isReady: isReady,
+        skipHintOpacity: skipHintOpacity,
       );
     }
 
     // Phase 3: Glitch (0.55 to 0.85)
     if (t < 0.85) {
       final local = _clamp((t - 0.55) / 0.30);
-      final fillColor = Color.lerp(GruvboxColors.orange, GruvboxColors.red, local)!;
+      final fillColor =
+          Color.lerp(GruvboxColors.orange, GruvboxColors.red, local)!;
       final barH = TerminalConstants.loadingBarHeight + local * 20.0;
       final blurS = local * 3.0;
       final shakeX = (_rng.nextDouble() * 28) - 14;
@@ -119,6 +130,8 @@ class LoadingController {
         fillColor: fillColor,
         scaleZoom: 1.0,
         overlayOpacity: 0.0,
+        isReady: isReady,
+        skipHintOpacity: skipHintOpacity,
       );
     }
 
@@ -135,10 +148,12 @@ class LoadingController {
       statusOpacity: _clamp(1.0 - local),
       showGhosts: false,
       statusText: '100% -- Done.',
-      progressPercent: _clamp(local) * 10 + 90,
+      progressPercent: local * 10 + 90,
       fillColor: GruvboxColors.red_dark,
       scaleZoom: scale,
       overlayOpacity: _clamp(local),
+      isReady: isReady,
+      skipHintOpacity: 0.0,
     );
   }
 }
