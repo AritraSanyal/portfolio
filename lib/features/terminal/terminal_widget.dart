@@ -6,7 +6,7 @@ import '../../config/constants.dart';
 import 'fastfetch_widget.dart';
 import 'terminal_controller.dart';
 import 'output_area.dart';
-import 'input_row.dart';
+import 'custom_terminal_input.dart';
 
 class TerminalWidget extends StatelessWidget {
   const TerminalWidget({super.key});
@@ -41,8 +41,10 @@ class TerminalWidget extends StatelessWidget {
             child: Column(
               children: [
                 _TitleBar(),
-                OutputArea(controller: controller),
-                InputRow(controller: controller),
+                Expanded(
+                  child: OutputArea(controller: controller),
+                ),
+                CustomTerminalInput(controller: controller),
               ],
             ),
           ),

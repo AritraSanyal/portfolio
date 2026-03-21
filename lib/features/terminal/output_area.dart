@@ -9,22 +9,20 @@ class OutputArea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Flexible(
-      child: Scrollbar(
-        controller: controller.scrollController,
-        thumbVisibility: true,
-        thickness: 4,
-        radius: const Radius.circular(2),
-        child: ColoredBox(
-          color: GruvboxColors.bg_hard,
-          child: ListView.builder(
-            controller: controller.scrollController,
-            padding: const EdgeInsets.all(12),
-            itemCount: controller.outputLines.length,
-            itemBuilder: (context, index) {
-              return controller.outputLines[index];
-            },
-          ),
+    return Scrollbar(
+      controller: controller.scrollController,
+      thumbVisibility: true,
+      thickness: 4,
+      radius: const Radius.circular(2),
+      child: ColoredBox(
+        color: GruvboxColors.bg_hard,
+        child: ListView.builder(
+          controller: controller.scrollController,
+          padding: const EdgeInsets.all(12),
+          itemCount: controller.outputLines.length,
+          itemBuilder: (context, index) {
+            return controller.outputLines[index];
+          },
         ),
       ),
     );
