@@ -7,6 +7,7 @@ import '../../config/constants.dart';
 import '../../filesystem/easter_eggs.dart';
 import '../../filesystem/virtual_fs.dart';
 import '../../widgets/typewriter_engine.dart';
+import 'fastfetch_widget.dart';
 
 class TerminalController extends ChangeNotifier {
   final CommandRegistry registry;
@@ -92,6 +93,12 @@ class TerminalController extends ChangeNotifier {
     _scheduleScrollToBottom();
   }
 
+  void showFastfetch() {
+    final lines = FastfetchLines.buildLines();
+    appendLines(lines);
+    appendLines(FastfetchLines.footer());
+  }
+
   // ── Input Handling ───────────────────────────────────────────────────────────
 
   Future<void> handleInput(String raw) async {
@@ -110,6 +117,11 @@ class TerminalController extends ChangeNotifier {
 
     if (cmd == 'clear') {
       clear();
+      return;
+    }
+
+    if (cmd == 'fastfetch') {
+      showFastfetch();
       return;
     }
 
@@ -211,17 +223,16 @@ class TerminalController extends ChangeNotifier {
       final matches = registry.matchPrefix(prefix);
 
       if (matches.isNotEmpty) {
-        _suggestions = matches;
         _currentInput = input;
-        _suggestionIndex = 0;
         final match = matches[0];
         if (match.length > input.length) {
+          _suggestions = matches;
+          _suggestionIndex = 0;
           return match.substring(input.length);
         }
         return null;
       }
 
-      _suggestions = [];
       return null;
     }
 
@@ -241,31 +252,29 @@ class TerminalController extends ChangeNotifier {
         .toList();
 
     if (fileMatches.isEmpty) {
-      _suggestions = [];
       return null;
     }
 
-    _suggestions = fileMatches;
     _currentInput = input;
-    _suggestionIndex = 0;
 
     final fullMatch = '$cmd ${fileMatches[0]}';
     if (fullMatch.length > input.length) {
+      _suggestions = fileMatches;
+      _suggestionIndex = 0;
       return fullMatch.substring(input.length);
     }
     return null;
   }
 
-  /// Cycles to the next suggestion. Returns the new ghost suffix.
+  /// Cycles to the next suggestion and returns the FULL suggestion with space.
   /// If input changed, resets suggestions first.
+  /// Always cycles through all suggestions (including single match).
   String? cycleSuggestion(String input) {
-    // If input changed, reset suggestions
     if (input != _currentInput) {
       ghostSuggest(input);
     }
 
     if (_suggestions.isEmpty) return null;
-    if (_suggestions.length == 1) return null; // No cycling needed
 
     _suggestionIndex = (_suggestionIndex + 1) % _suggestions.length;
 
@@ -280,10 +289,7 @@ class TerminalController extends ChangeNotifier {
       newFull = _suggestions[_suggestionIndex];
     }
 
-    if (newFull.length > input.length) {
-      return newFull.substring(input.length);
-    }
-    return null;
+    return '$newFull ';
   }
 
   /// Returns the currently selected suggestion (for accepting with Enter).
