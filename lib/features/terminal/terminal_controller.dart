@@ -1,13 +1,10 @@
 import 'dart:async';
-import 'dart:js_interop';
 import 'package:flutter/material.dart';
 import 'package:web/web.dart' as web;
 import '../../commands/command_registry.dart';
 import '../../config/colors.dart';
 import '../../config/text_styles.dart';
-import '../../config/constants.dart';
 import '../../filesystem/easter_eggs.dart';
-import '../../filesystem/virtual_fs.dart';
 import '../../widgets/typewriter_engine.dart';
 import 'fastfetch_widget.dart';
 

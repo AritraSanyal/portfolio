@@ -15,7 +15,7 @@ class OutputArea extends StatelessWidget {
       thickness: 4,
       radius: const Radius.circular(2),
       child: ColoredBox(
-        color: GruvboxColors.bg_hard,
+        color: GruvboxColors.bgHard,
         child: ListView.builder(
           controller: controller.scrollController,
           padding: const EdgeInsets.all(12),

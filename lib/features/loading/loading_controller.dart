@@ -153,7 +153,7 @@ class LoadingController {
       showGhosts: false,
       statusText: '100% -- Done.',
       progressPercent: 100,
-      fillColor: GruvboxColors.red_dark,
+      fillColor: GruvboxColors.redDark,
       scaleZoom: scale,
       overlayOpacity: _clamp(local),
       isReady: isReady,

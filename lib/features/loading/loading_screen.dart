@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../config/colors.dart';
@@ -99,7 +98,7 @@ class _LoadingScreenState extends State<LoadingScreen>
     if (ready) {
       statusText = 'Ready! Press Enter to continue or wait...';
     } else {
-      statusText = '${state.statusText}';
+      statusText = state.statusText;
     }
 
     final fontStatus = _fontsLoaded ? '[Done]' : '[Loading fonts...]';
@@ -118,7 +117,7 @@ class _LoadingScreenState extends State<LoadingScreen>
           return KeyEventResult.ignored;
         },
         child: ColoredBox(
-          color: GruvboxColors.bg_hard,
+          color: GruvboxColors.bgHard,
           child: Stack(
             fit: StackFit.expand,
             children: [
@@ -162,8 +161,8 @@ class _LoadingScreenState extends State<LoadingScreen>
               if (safeOverlayOpacity > 0)
                 IgnorePointer(
                   child: ColoredBox(
-                    color:
-                        GruvboxColors.bg_hard.withOpacity(safeOverlayOpacity),
+                    color: GruvboxColors.bgHard
+                        .withAlpha((safeOverlayOpacity * 255).round()),
                   ),
                 ),
             ],

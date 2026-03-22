@@ -18,7 +18,7 @@ class _BlinkingCursorState extends State<BlinkingCursor> {
   void initState() {
     super.initState();
     _timer = Timer.periodic(
-      Duration(milliseconds: TerminalConstants.cursorBlinkMs),
+      const Duration(milliseconds: TerminalConstants.cursorBlinkMs),
       (_) => setState(() => _visible = !_visible),
     );
   }
