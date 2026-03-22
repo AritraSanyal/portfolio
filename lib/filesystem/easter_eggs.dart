@@ -25,10 +25,11 @@ Map<String, List<Widget>> buildEasterEggs() {
       // TODO: Replace with your own fun secret message
       _r('✦ you found the secret ✦', GruvboxColors.purple),
       _r('', GruvboxColors.purple),
-      _r('real talk: I spent 3 days perfecting this loading bar.', GruvboxColors.purple),
+      _r('real talk: I spent 3 days perfecting this loading bar.',
+          GruvboxColors.purple),
       _r("it's 47 lines of dart. totally worth it.", GruvboxColors.purple),
       _r('', GruvboxColors.purple),
-      _r('— TODO_NAME', GruvboxColors.purple),
+      _r('— Aritra Sanyal', GruvboxColors.purple),
     ],
     'vim': [
       _r('opens vim... just kidding.', GruvboxColors.yellow),
@@ -42,7 +43,8 @@ Map<String, List<Widget>> buildEasterEggs() {
       _r('commit 0j1k2l3 — chore: shipped stuff', GruvboxColors.body),
     ],
     'man cat': [
-      _r('CAT(1)          Portfolio Manual          CAT(1)', GruvboxColors.yellow),
+      _r('CAT(1)          Portfolio Manual          CAT(1)',
+          GruvboxColors.yellow),
       _r('', GruvboxColors.body),
       _r('NAME', GruvboxColors.cyan),
       _r('     cat — concatenate and display files', GruvboxColors.body),
@@ -56,7 +58,7 @@ Map<String, List<Widget>> buildEasterEggs() {
       _r('', GruvboxColors.body),
       // TODO: Replace with your name
       _r('AUTHOR', GruvboxColors.cyan),
-      _r('     TODO_NAME', GruvboxColors.body),
+      _r('     Aritra Sanyal', GruvboxColors.body),
       _r('', GruvboxColors.body),
       _r('BUGS', GruvboxColors.cyan),
       _r('     None. I write perfect code.', GruvboxColors.body),
@@ -65,7 +67,8 @@ Map<String, List<Widget>> buildEasterEggs() {
       _r('Available commands:', GruvboxColors.yellow),
       _r('', GruvboxColors.body),
       _r('  ls              list files', GruvboxColors.body),
-      _r('  ls -la          list all files (including hidden)', GruvboxColors.body),
+      _r('  ls -la          list all files (including hidden)',
+          GruvboxColors.body),
       _r('  cat <file>      display file contents', GruvboxColors.body),
       _r('  open resume.pdf open resume in browser', GruvboxColors.body),
       _r('  pwd             print working directory', GruvboxColors.body),

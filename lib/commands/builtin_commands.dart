@@ -29,9 +29,18 @@ class WhoamiCommand implements CommandHandler {
   @override
   Future<List<Widget>> execute(List<String> args) async {
     return [
-      // TODO: Replace with your name and tagline
-      _simple('TODO_NAME — Flutter dev who ships things.',
-          color: GruvboxColors.green),
+      RichText(
+        text: TextSpan(
+          text: 'Aritra Sanyal',
+          style: GruvboxText.body(color: GruvboxColors.green, size: 13),
+        ),
+      ),
+      _simple('Flutter dev building cross-platform mobile apps with AI.',
+          color: GruvboxColors.body),
+      _simple('Passionate about clean UI/UX and mobile architecture.',
+          color: GruvboxColors.body),
+      _simple('B.Tech CSE @ UEM Jaipur | E-Cell President | Flutter Mentor.',
+          color: GruvboxColors.muted),
     ];
   }
 }

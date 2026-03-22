@@ -75,11 +75,11 @@ class FastfetchBuilder {
     'Shell:     portfolio.sh',
     'Name:      Aritra Sanyal',
     'Role:      Flutter Developer',
-    'Location:  TODO_CITY',
-    'GitHub:    TODO_GITHUB',
+    'Location:  Jaipur, India',
+    'GitHub:    AritraSanyal',
     'Skills:    Flutter · Dart · Firebase',
-    'Projects:  TODO_N shipped apps',
-    'Contact:   TODO_EMAIL',
+    'Projects:  1 shipped apps',
+    'Contact:   aritra.sanyal.official@gmail.com',
   ];
 
   static FastfetchDisplay buildDisplay() {

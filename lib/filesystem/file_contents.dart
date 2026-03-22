@@ -6,7 +6,8 @@ import '../config/text_styles.dart';
 
 // ── Helper ────────────────────────────────────────────────────────────────────
 
-RichText _line(List<TextSpan> spans) => RichText(text: TextSpan(children: spans));
+RichText _line(List<TextSpan> spans) =>
+    RichText(text: TextSpan(children: spans));
 RichText _blank() => RichText(text: const TextSpan(text: ''));
 
 TextSpan _s(String t, {Color? c, FontWeight? w}) => TextSpan(
@@ -27,52 +28,74 @@ List<Widget> buildAbout() {
   return [
     _line([_s('# About', c: GruvboxColors.yellow, w: FontWeight.w700)]),
     _line([_s('──────────────────────────────', c: GruvboxColors.surface)]),
-    _line([_s(
-      // TODO: Replace with your actual bio paragraph
-      'A Flutter developer who turns caffeine and Dart code into polished',
-      c: GruvboxColors.body,
-    )]),
-    _line([_s(
-      'cross-platform experiences. Passionate about clean architecture,',
-      c: GruvboxColors.body,
-    )]),
-    _line([_s(
-      'smooth animations, and shipping things that actually work.',
-      c: GruvboxColors.body,
-    )]),
+    _blank(),
+    _line([
+      _s(
+        'Flutter developer building cross-platform mobile apps with AI.',
+        c: GruvboxColors.body,
+      )
+    ]),
+    _line([
+      _s(
+        'Passionate about clean UI/UX and mobile app architecture.',
+        c: GruvboxColors.body,
+      )
+    ]),
+    _line([
+      _s(
+        'Currently pursuing B.Tech in CSE @ UEM Jaipur.',
+        c: GruvboxColors.body,
+      )
+    ]),
+    _blank(),
+    _line([
+      _s('## Roles & Activities', c: GruvboxColors.yellow, w: FontWeight.w700)
+    ]),
+    _blank(),
+    _line([
+      _s('President', c: GruvboxColors.orange, w: FontWeight.w600),
+      _s(' — E-Cell, UEM Jaipur', c: GruvboxColors.muted),
+    ]),
+    _line([
+      _s('Leading a 30-member team, executing flagship events.',
+          c: GruvboxColors.body)
+    ]),
+    _line([
+      _s('Secured sponsorships, increased revenue by ~45% YoY.',
+          c: GruvboxColors.body)
+    ]),
+    _blank(),
+    _line([
+      _s('Flutter Mentor', c: GruvboxColors.orange, w: FontWeight.w600),
+      _s(' — Workshop Facilitator', c: GruvboxColors.muted),
+    ]),
+    _line([
+      _s('Mentored 100+ students in Flutter & Dart basics.',
+          c: GruvboxColors.body)
+    ]),
+    _line([
+      _s('Guided participants from zero to their first cross-platform app.',
+          c: GruvboxColors.body)
+    ]),
     _blank(),
     _line([_s('## Journey', c: GruvboxColors.yellow, w: FontWeight.w700)]),
     _blank(),
     _line([
-      // TODO: Replace years and milestones with your actual timeline
-      _s('2019', c: GruvboxColors.orange),
-      _s(' ──► ', c: GruvboxColors.surface),
-      _s('Started programming, fell in love with mobile dev', c: GruvboxColors.body),
-    ]),
-    _line([
-      _s('2020', c: GruvboxColors.orange),
-      _s(' ──► ', c: GruvboxColors.surface),
-      _s('Discovered Flutter; first app shipped on Play Store', c: GruvboxColors.body),
-    ]),
-    _line([
-      _s('2021', c: GruvboxColors.orange),
-      _s(' ──► ', c: GruvboxColors.surface),
-      _s('Firebase, Riverpod, and real production traffic', c: GruvboxColors.body),
-    ]),
-    _line([
       _s('2022', c: GruvboxColors.orange),
       _s(' ──► ', c: GruvboxColors.surface),
-      _s('Freelance Flutter consulting, 3 client apps delivered', c: GruvboxColors.body),
-    ]),
-    _line([
-      _s('2023', c: GruvboxColors.orange),
-      _s(' ──► ', c: GruvboxColors.surface),
-      _s('Open-source contributions, exploring Flutter Web', c: GruvboxColors.body),
+      _s('Started B.Tech CSE, discovered Flutter', c: GruvboxColors.body),
     ]),
     _line([
       _s('2024', c: GruvboxColors.orange),
       _s(' ──► ', c: GruvboxColors.surface),
-      _s('Built this terminal portfolio — because why not', c: GruvboxColors.body),
+      _s('Built AI-powered Advertisement Generation App',
+          c: GruvboxColors.body),
+    ]),
+    _line([
+      _s('2025', c: GruvboxColors.orange),
+      _s(' ──► ', c: GruvboxColors.surface),
+      _s('Shipped Mesure health app, became E-Cell President',
+          c: GruvboxColors.body),
     ]),
     _blank(),
   ];
@@ -98,24 +121,34 @@ List<Widget> buildSkills() {
     _line([_s('# Skills', c: GruvboxColors.yellow, w: FontWeight.w700)]),
     _line([_s('──────────────────────────────', c: GruvboxColors.surface)]),
     _blank(),
-    _line([_s('[ Flutter & Dart ]', c: GruvboxColors.orange, w: FontWeight.w700)]),
-    // TODO: Adjust skill levels (0–10) to match your actual proficiency
+    _line([
+      _s('[ Mobile Development ]', c: GruvboxColors.orange, w: FontWeight.w700)
+    ]),
     bar('Flutter', 9),
     bar('Dart', 9),
-    bar('Flutter Web', 8),
-    bar('Animations', 7),
-    _blank(),
-    _line([_s('[ Backend & Tools ]', c: GruvboxColors.orange, w: FontWeight.w700)]),
+    bar('Android', 7),
+    bar('iOS', 6),
     bar('Firebase', 8),
-    bar('REST APIs', 7),
-    bar('Git', 8),
+    _blank(),
+    _line([_s('[ Languages ]', c: GruvboxColors.orange, w: FontWeight.w700)]),
+    bar('Python', 7),
+    bar('Java', 7),
+    bar('C', 6),
+    bar('Kotlin', 5),
+    _blank(),
+    _line([
+      _s('[ Tools & Concepts ]', c: GruvboxColors.orange, w: FontWeight.w700)
+    ]),
+    bar('Git/GitHub', 9),
+    bar('REST APIs', 8),
+    bar('UI/UX', 8),
+    bar('Animations', 7),
     bar('CI/CD', 6),
     _blank(),
-    _line([_s('[ State Management ]', c: GruvboxColors.orange, w: FontWeight.w700)]),
-    bar('Riverpod', 8),
-    bar('BLoC', 7),
-    bar('Provider', 8),
-    bar('GetX', 5),
+    _line([_s('[ AI/ML ]', c: GruvboxColors.orange, w: FontWeight.w700)]),
+    bar('PyTorch', 6),
+    bar('LLMs', 5),
+    bar('Hugging Face', 6),
     _blank(),
   ];
 }
@@ -132,7 +165,10 @@ List<Widget> buildProjects() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _line([_s('┌─────────────────────────────────────┐', c: GruvboxColors.surface)]),
+        _line([
+          _s('┌─────────────────────────────────────┐',
+              c: GruvboxColors.surface)
+        ]),
         _line([
           _s('│  ', c: GruvboxColors.surface),
           _s(name.padRight(35), c: GruvboxColors.yellow, w: FontWeight.w700),
@@ -143,7 +179,10 @@ List<Widget> buildProjects() {
           _s(description.padRight(35), c: GruvboxColors.body),
           _s('│', c: GruvboxColors.surface),
         ]),
-        _line([_s('│                                     │', c: GruvboxColors.surface)]),
+        _line([
+          _s('│                                     │',
+              c: GruvboxColors.surface)
+        ]),
         _line([
           _s('│  ', c: GruvboxColors.surface),
           _s('Stack: ', c: GruvboxColors.cyan),
@@ -157,7 +196,10 @@ List<Widget> buildProjects() {
           _s(' ' * (34 - githubUrl.length - 2), c: GruvboxColors.body),
           _s('│', c: GruvboxColors.surface),
         ]),
-        _line([_s('└─────────────────────────────────────┘', c: GruvboxColors.surface)]),
+        _line([
+          _s('└─────────────────────────────────────┘',
+              c: GruvboxColors.surface)
+        ]),
         _blank(),
       ],
     );
@@ -167,24 +209,17 @@ List<Widget> buildProjects() {
     _line([_s('# Projects', c: GruvboxColors.yellow, w: FontWeight.w700)]),
     _line([_s('──────────────────────────────', c: GruvboxColors.surface)]),
     _blank(),
-    // TODO: Replace with your actual project details
     card(
-      name: 'TODO_PROJECT_ONE',
-      description: 'TODO: Short project description',
-      stack: 'Flutter · Firebase · Riverpod',
-      githubUrl: 'github.com/TODO_GITHUB/TODO_PROJECT_ONE',
+      name: 'Advertisement Generation App',
+      description: 'AI-powered ad copy generator',
+      stack: 'Flutter · Gemini API · Firebase',
+      githubUrl: 'github.com/AritraSanyal/TODO_AD_PROJECT',
     ),
     card(
-      name: 'TODO_PROJECT_TWO',
-      description: 'TODO: Short project description',
-      stack: 'Flutter · REST API · BLoC',
-      githubUrl: 'github.com/TODO_GITHUB/TODO_PROJECT_TWO',
-    ),
-    card(
-      name: 'TODO_PROJECT_THREE',
-      description: 'TODO: Short project description',
-      stack: 'Flutter Web · Dart · Firebase',
-      githubUrl: 'github.com/TODO_GITHUB/TODO_PROJECT_THREE',
+      name: 'Mesure — Health App',
+      description: 'Camera-based health monitoring',
+      stack: 'Flutter · Firebase · Signal Proc.',
+      githubUrl: 'github.com/AritraSanyal/TODO_MESURE_PROJECT',
     ),
   ];
 }
@@ -196,40 +231,41 @@ List<Widget> buildContact() {
     _line([_s('# Contact', c: GruvboxColors.yellow, w: FontWeight.w700)]),
     _line([_s('──────────────────────────────', c: GruvboxColors.surface)]),
     _blank(),
-    _line([_s('┌──────────────────────────────────────┐', c: GruvboxColors.surface)]),
-    _line([_s('│            Get In Touch              │', c: GruvboxColors.surface)]),
-    _line([_s('├──────────────────────────────────────┤', c: GruvboxColors.surface)]),
+    _line([
+      _s('┌──────────────────────────────────────┐', c: GruvboxColors.surface)
+    ]),
+    _line([
+      _s('│            Get In Touch              │', c: GruvboxColors.surface)
+    ]),
+    _line([
+      _s('├──────────────────────────────────────┤', c: GruvboxColors.surface)
+    ]),
     _line([
       _s('│  ', c: GruvboxColors.surface),
       _s('Email   : ', c: GruvboxColors.cyan),
-      // TODO: Replace with your actual email
-      _link('TODO_EMAIL@example.com', 'mailto:TODO_EMAIL@example.com'),
-      _s('         │', c: GruvboxColors.surface),
+      _link('aritra.sanyal.official@gmail.com',
+          'mailto:aritra.sanyal.official@gmail.com'),
+      _s('  │', c: GruvboxColors.surface),
     ]),
     _line([
       _s('│  ', c: GruvboxColors.surface),
       _s('GitHub  : ', c: GruvboxColors.cyan),
-      // TODO: Replace with your GitHub profile URL
-      _link('github.com/TODO_GITHUB', 'https://github.com/TODO_GITHUB'),
-      _s('           │', c: GruvboxColors.surface),
+      _link('github.com/AritraSanyal', 'https://github.com/AritraSanyal'),
+      _s('        │', c: GruvboxColors.surface),
     ]),
     _line([
       _s('│  ', c: GruvboxColors.surface),
-      _s('Twitter : ', c: GruvboxColors.cyan),
-      // TODO: Replace with your Twitter handle
-      _link('@TODO_TWITTER', 'https://twitter.com/TODO_TWITTER'),
-      _s('                  │', c: GruvboxColors.surface),
+      _s('Phone   : ', c: GruvboxColors.cyan),
+      _s('+91 7980769212', c: GruvboxColors.body),
+      _s('                │', c: GruvboxColors.surface),
     ]),
     _line([
-      _s('│  ', c: GruvboxColors.surface),
-      _s('LinkedIn: ', c: GruvboxColors.cyan),
-      // TODO: Replace with your LinkedIn profile URL
-      _link('linkedin.com/in/TODO_LINKEDIN', 'https://linkedin.com/in/TODO_LINKEDIN'),
-      _s('  │', c: GruvboxColors.surface),
+      _s('└──────────────────────────────────────┘', c: GruvboxColors.surface)
     ]),
-    _line([_s('└──────────────────────────────────────┘', c: GruvboxColors.surface)]),
     _blank(),
-    _line([_s('Open to freelance & full-time opportunities.', c: GruvboxColors.faded)]),
+    _line([
+      _s('Open to freelance & full-time opportunities.', c: GruvboxColors.faded)
+    ]),
     _blank(),
   ];
 }
