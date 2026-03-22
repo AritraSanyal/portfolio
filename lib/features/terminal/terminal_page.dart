@@ -56,7 +56,7 @@ class _TerminalPageState extends State<TerminalPage> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final scale = screenWidth > 600 ? 1.5 : 1.0;
+    final scale = screenWidth > 1024 ? 1.5 : (screenWidth > 600 ? 1.1 : 1.0);
 
     return ChangeNotifierProvider<TerminalController>.value(
       value: _controller,

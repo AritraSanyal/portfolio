@@ -40,25 +40,7 @@ class _LoadingScreenState extends State<LoadingScreen>
       ..addListener(_onAnimationUpdate)
       ..forward();
 
-    _loadFonts();
-  }
-
-  Future<void> _loadFonts() async {
-    try {
-      final fontLoader = FontLoader('JetBrains Mono');
-      fontLoader.addFont(() async {
-        final fontData = await rootBundle
-            .load('packages/google_fonts/fonts/JetBrainsMono-Regular.ttf');
-        return fontData.buffer.asByteData()!;
-      }());
-      await fontLoader.load();
-    } catch (e) {
-      debugPrint('Font loading error: $e');
-    }
-
-    if (mounted) {
-      setState(() => _fontsLoaded = true);
-    }
+    _fontsLoaded = true;
   }
 
   void _onAnimationUpdate() {

@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import '../../config/colors.dart';
 import '../../config/text_styles.dart';
 import '../../config/constants.dart';
-import 'fastfetch_widget.dart';
 import 'terminal_controller.dart';
 import 'output_area.dart';
 import 'custom_terminal_input.dart';
@@ -14,10 +13,11 @@ class TerminalWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screen = MediaQuery.of(context).size;
-    final width = (screen.width * TerminalConstants.terminalWidthRatio)
-        .clamp(280.0, TerminalConstants.terminalMaxWidth);
+    final width = (screen.width * TerminalConstants.terminalWidthRatio).clamp(
+        TerminalConstants.terminalMinWidth, TerminalConstants.terminalMaxWidth);
     final height = (screen.height * TerminalConstants.terminalHeightRatio)
-        .clamp(300.0, TerminalConstants.terminalMaxHeight);
+        .clamp(TerminalConstants.terminalMinHeight,
+            TerminalConstants.terminalMaxHeight);
 
     return Consumer<TerminalController>(
       builder: (context, controller, _) {

@@ -213,13 +213,13 @@ List<Widget> buildProjects() {
       name: 'Advertisement Generation App',
       description: 'AI-powered ad copy generator',
       stack: 'Flutter · Gemini API · Firebase',
-      githubUrl: 'github.com/AritraSanyal/TODO_AD_PROJECT',
+      githubUrl: 'github.com/AritraSanyal/imgtxtgen',
     ),
     card(
       name: 'Mesure — Health App',
       description: 'Camera-based health monitoring',
       stack: 'Flutter · Firebase · Signal Proc.',
-      githubUrl: 'github.com/AritraSanyal/TODO_MESURE_PROJECT',
+      githubUrl: 'github.com/AritraSanyal/mesure_app',
     ),
   ];
 }

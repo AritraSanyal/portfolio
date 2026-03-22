@@ -47,7 +47,7 @@ class _FastfetchWidgetState extends State<FastfetchWidget> {
 }
 
 class FastfetchBuilder {
-  static const double _breakpoint = 576.0;
+  static const double _breakpoint = 600.0;
 
   static const List<String> _artRows = [
     '                                      ',
@@ -143,9 +143,9 @@ class FastfetchDisplay extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        artColumn,
+        Flexible(fit: FlexFit.loose, child: artColumn),
         const SizedBox(width: 24),
-        infoColumn,
+        Flexible(fit: FlexFit.loose, child: infoColumn),
       ],
     );
   }

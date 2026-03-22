@@ -162,9 +162,11 @@ class _CustomTerminalInputState extends State<CustomTerminalInput> {
                     alignment: Alignment.centerLeft,
                     children: [
                       if (_ghostSuffix.isNotEmpty)
-                        _GhostSuggestion(
-                          typed: _textController.text,
-                          ghost: _ghostSuffix,
+                        ClipRect(
+                          child: _GhostSuggestion(
+                            typed: _textController.text,
+                            ghost: _ghostSuffix,
+                          ),
                         ),
                       EditableText(
                         controller: _textController,
