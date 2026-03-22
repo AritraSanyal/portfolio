@@ -237,6 +237,12 @@ class _TerminalPageState extends State<TerminalPage>
             style: GruvboxText.muted(size: 20),
           ),
           const SizedBox(height: 22),
+          _buildInfoBlock('BIO', [
+            'Flutter developer building cross-platform apps that actually ship.',
+            'Comfortable across the full mobile stack — from signal processing',
+            'to animated dashboards to AI-powered ad generators.',
+          ]),
+          const SizedBox(height: 22),
           const Divider(height: 1, color: GruvboxColors.overlay),
           const SizedBox(height: 22),
           LayoutBuilder(
@@ -245,71 +251,84 @@ class _TerminalPageState extends State<TerminalPage>
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _buildAboutLeft(),
-                    const SizedBox(height: 22),
-                    _buildAboutRight(),
+                    _buildInfoBlock('EDUCATION', [
+                      'B.Tech CSE · UEM Jaipur · CGPA 7.65',
+                      '2022 – Present',
+                    ]),
+                    const SizedBox(height: 18),
+                    _buildInfoBlock('E-CELL', [
+                      'President · UEM Jaipur · 2024–25',
+                      '30-member team · 3 events · 200+ students',
+                    ]),
+                    const SizedBox(height: 18),
+                    _buildInfoBlock('CONTACT', [
+                      '+91 7980769212',
+                      'aritra.sanyal.official@gmail.com',
+                    ], links: [
+                      null,
+                      'mailto:aritra.sanyal.official@gmail.com',
+                    ]),
+                    const SizedBox(height: 18),
+                    _buildInfoBlock('LOCATION', [
+                      'Jaipur, Rajasthan, India',
+                    ]),
+                    const SizedBox(height: 18),
+                    _buildInfoBlock('WORKSHOP', [
+                      'Mentor · Flutter Workshop 2024',
+                      '50–100 beginner · 40 advanced students',
+                    ]),
                   ],
                 );
               }
               return Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(child: _buildAboutLeft()),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildInfoBlock('EDUCATION', [
+                          'B.Tech CSE · UEM Jaipur · CGPA 7.65',
+                          '2022 – Present',
+                        ]),
+                        const SizedBox(height: 18),
+                        _buildInfoBlock('E-CELL', [
+                          'President · UEM Jaipur · 2024–25',
+                          '30-member team · 3 events · 200+ students',
+                        ]),
+                        const SizedBox(height: 18),
+                        _buildInfoBlock('CONTACT', [
+                          '+91 7980769212',
+                          'aritra.sanyal.official@gmail.com',
+                        ], links: [
+                          null,
+                          'mailto:aritra.sanyal.official@gmail.com',
+                        ]),
+                      ],
+                    ),
+                  ),
                   const SizedBox(width: 48),
-                  Expanded(child: _buildAboutRight()),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildInfoBlock('LOCATION', [
+                          'Jaipur, Rajasthan, India',
+                        ]),
+                        const SizedBox(height: 18),
+                        _buildInfoBlock('WORKSHOP', [
+                          'Mentor · Flutter Workshop 2024',
+                          '50–100 beginner · 40 advanced students',
+                        ]),
+                      ],
+                    ),
+                  ),
                 ],
               );
             },
           ),
         ],
       ),
-    );
-  }
-
-  Widget _buildAboutLeft() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildInfoBlock('BIO', [
-          'Flutter developer building cross-platform apps that actually ship.',
-          'Comfortable across the full mobile stack — from signal processing',
-          'to animated dashboards to AI-powered ad generators.',
-        ]),
-        const SizedBox(height: 18),
-        _buildInfoBlock('EDUCATION', [
-          'B.Tech CSE · UEM Jaipur · CGPA 7.65',
-          '2022 – Present',
-        ]),
-        const SizedBox(height: 18),
-        _buildInfoBlock('E-CELL', [
-          'President · UEM Jaipur · 2024–25',
-          '30-member team · 3 events · 200+ students',
-        ]),
-      ],
-    );
-  }
-
-  Widget _buildAboutRight() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _buildInfoBlock('CONTACT', [
-          '+91 7980769212',
-          'aritra.sanyal.official@gmail.com',
-        ], links: [
-          null,
-          'mailto:aritra.sanyal.official@gmail.com',
-        ]),
-        const SizedBox(height: 18),
-        _buildInfoBlock('LOCATION', [
-          'Jaipur, Rajasthan, India',
-        ]),
-        const SizedBox(height: 18),
-        _buildInfoBlock('WORKSHOP', [
-          'Mentor · Flutter Workshop 2024',
-          '50–100 beginner · 40 advanced students',
-        ]),
-      ],
     );
   }
 
