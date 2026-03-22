@@ -121,6 +121,7 @@ class _LoadingScreenState extends State<LoadingScreen>
     }
 
     final fontStatus = _fontsLoaded ? '[Done]' : '[Loading fonts...]';
+    final scale = screenW > 600 ? 1.5 : 1.0;
 
     return GestureDetector(
       onTap: () => setState(() => _skipRequested = true),
@@ -141,7 +142,7 @@ class _LoadingScreenState extends State<LoadingScreen>
             children: [
               Center(
                 child: Transform.scale(
-                  scale: 1.5,
+                  scale: scale,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [

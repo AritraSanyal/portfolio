@@ -55,6 +55,9 @@ class _TerminalPageState extends State<TerminalPage> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final scale = screenWidth > 600 ? 1.5 : 1.0;
+
     return ChangeNotifierProvider<TerminalController>.value(
       value: _controller,
       child: Scaffold(
@@ -66,7 +69,7 @@ class _TerminalPageState extends State<TerminalPage> {
             // Centered terminal
             Center(
               child: Transform.scale(
-                scale: 1.5,
+                scale: scale,
                 child: const TerminalWidget(),
               ),
             ),
