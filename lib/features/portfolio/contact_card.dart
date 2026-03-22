@@ -20,8 +20,8 @@ class ContactCard extends StatelessWidget {
     return GestureDetector(
       onTap: url != null ? () => _launchUrl(url!) : null,
       child: Container(
-        constraints: const BoxConstraints(minWidth: 190),
-        padding: const EdgeInsets.all(14),
+        padding:
+            const EdgeInsets.only(top: 16, bottom: 16, left: 18, right: 18),
         decoration: BoxDecoration(
           color: GruvboxColors.bg,
           border: Border.all(color: GruvboxColors.overlay),
@@ -35,7 +35,9 @@ class ContactCard extends StatelessWidget {
             const SizedBox(height: 4),
             Text(
               value,
-              style: url != null ? GruvboxText.link() : GruvboxText.infoValue(),
+              style: url != null
+                  ? GruvboxText.link(size: 13)
+                  : GruvboxText.infoValue(size: 13),
             ),
           ],
         ),

@@ -28,7 +28,7 @@ class PortfolioSection extends StatelessWidget {
             padding: _responsivePadding(context),
             child: Center(
               child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 860),
+                constraints: const BoxConstraints(maxWidth: 960),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -49,7 +49,7 @@ class PortfolioSection extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
     final t = ((width - 320) / (1200 - 320)).clamp(0.0, 1.0);
     final vertical = lerpDouble(36, 64, t)!;
-    final horizontal = lerpDouble(20, 60, t)!;
+    final horizontal = lerpDouble(20, 64, t)!;
     return EdgeInsets.symmetric(vertical: vertical, horizontal: horizontal);
   }
 }

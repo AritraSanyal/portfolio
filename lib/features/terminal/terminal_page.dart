@@ -113,27 +113,18 @@ class _TerminalPageState extends State<TerminalPage>
       value: _controller,
       child: Scaffold(
         backgroundColor: GruvboxColors.bg,
-        body: LayoutBuilder(
-          builder: (context, constraints) {
-            final scale = constraints.maxWidth > 400 ? 1.15 : 1.0;
-            return Transform.scale(
-              scale: scale,
-              alignment: Alignment.center,
-              child: SingleChildScrollView(
-                controller: _scrollController,
-                child: Column(
-                  children: [
-                    _buildHero(context),
-                    _buildAboutSection(context),
-                    _buildSkillsSection(),
-                    _buildProjectsSection(),
-                    _buildContactSection(),
-                    _buildFooter(context),
-                  ],
-                ),
-              ),
-            );
-          },
+        body: SingleChildScrollView(
+          controller: _scrollController,
+          child: Column(
+            children: [
+              _buildHero(context),
+              _buildAboutSection(context),
+              _buildSkillsSection(),
+              _buildProjectsSection(),
+              _buildContactSection(),
+              _buildFooter(context),
+            ],
+          ),
         ),
       ),
     );
@@ -237,12 +228,13 @@ class _TerminalPageState extends State<TerminalPage>
         children: [
           Text(
             'Aritra Sanyal',
-            style: GruvboxText.sectionTitle(context),
+            style: GruvboxText.body(color: GruvboxColors.body, size: 32)
+                .copyWith(fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 4),
+          const SizedBox(height: 6),
           Text(
             'Flutter Developer · E-Cell President · Ships things that work.',
-            style: GruvboxText.muted(size: 12),
+            style: GruvboxText.muted(size: 13),
           ),
           const SizedBox(height: 22),
           const Divider(height: 1, color: GruvboxColors.overlay),
@@ -260,10 +252,11 @@ class _TerminalPageState extends State<TerminalPage>
               }
               return Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Expanded(child: _buildAboutLeft()),
-                  const SizedBox(width: 40),
-                  Expanded(child: _buildAboutRight()),
+                  Flexible(child: _buildAboutLeft()),
+                  const SizedBox(width: 48),
+                  Flexible(child: _buildAboutRight()),
                 ],
               );
             },
@@ -325,7 +318,8 @@ class _TerminalPageState extends State<TerminalPage>
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('[ $label ]', style: GruvboxText.infoLabel()),
+        Text(label,
+            style: GruvboxText.infoLabel().copyWith(letterSpacing: 0.18)),
         const SizedBox(height: 6),
         ...List.generate(lines.length, (i) {
           final isLink = links != null && links[i] != null;
@@ -364,7 +358,7 @@ class _TerminalPageState extends State<TerminalPage>
         children: [
           Text(
             'Technical Stack',
-            style: GruvboxText.body(color: GruvboxColors.body, size: 18)
+            style: GruvboxText.body(color: GruvboxColors.body, size: 20)
                 .copyWith(fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
@@ -405,29 +399,58 @@ class _TerminalPageState extends State<TerminalPage>
         children: [
           Text(
             'Shipped Work',
-            style: GruvboxText.body(color: GruvboxColors.body, size: 18)
+            style: GruvboxText.body(color: GruvboxColors.body, size: 20)
                 .copyWith(fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          const Wrap(
-            spacing: 12,
-            runSpacing: 12,
-            children: [
-              ProjectCard(
-                name: 'Advertisement Generation App',
-                date: 'Aug 2024',
-                desc:
-                    'Flutter + Gemini AI generating personalized ad copy from text prompts. 92% code reuse across Android & iOS, cut dev time by 40%.',
-                stack: 'Flutter · Dart · Gemini API · Firebase',
-              ),
-              ProjectCard(
-                name: 'Mesure — Health App',
-                date: 'Jan 2025',
-                desc:
-                    'Camera-based PPG tracking HR & SpO2 in real-time. Animated dashboard, PDF reports, mood logging, medication reminders. 15%+ accuracy improvement.',
-                stack: 'Flutter · Dart · Firebase · Signal Processing',
-              ),
-            ],
+          LayoutBuilder(
+            builder: (context, constraints) {
+              if (constraints.maxWidth < 600) {
+                return const Column(
+                  children: [
+                    ProjectCard(
+                      name: 'Advertisement Generation App',
+                      date: 'Aug 2024',
+                      desc:
+                          'Flutter + Gemini AI generating personalized ad copy from text prompts. 92% code reuse across Android & iOS, cut dev time by 40%.',
+                      stack: 'Flutter · Dart · Gemini API · Firebase',
+                    ),
+                    SizedBox(height: 12),
+                    ProjectCard(
+                      name: 'Mesure — Health App',
+                      date: 'Jan 2025',
+                      desc:
+                          'Camera-based PPG tracking HR & SpO2 in real-time. Animated dashboard, PDF reports, mood logging, medication reminders. 15%+ accuracy improvement.',
+                      stack: 'Flutter · Dart · Firebase · Signal Processing',
+                    ),
+                  ],
+                );
+              }
+              return const Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: ProjectCard(
+                      name: 'Advertisement Generation App',
+                      date: 'Aug 2024',
+                      desc:
+                          'Flutter + Gemini AI generating personalized ad copy from text prompts. 92% code reuse across Android & iOS, cut dev time by 40%.',
+                      stack: 'Flutter · Dart · Firebase API · Firebase',
+                    ),
+                  ),
+                  SizedBox(width: 12),
+                  Expanded(
+                    child: ProjectCard(
+                      name: 'Mesure — Health App',
+                      date: 'Jan 2025',
+                      desc:
+                          'Camera-based PPG tracking HR & SpO2 in real-time. Animated dashboard, PDF reports, mood logging, medication reminders. 15%+ accuracy improvement.',
+                      stack: 'Flutter · Dart · Firebase · Signal Processing',
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
         ],
       ),
@@ -442,38 +465,94 @@ class _TerminalPageState extends State<TerminalPage>
         children: [
           Text(
             'Get In Touch',
-            style: GruvboxText.body(color: GruvboxColors.body, size: 18)
+            style: GruvboxText.body(color: GruvboxColors.body, size: 20)
                 .copyWith(fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 6),
           Text(
             'Open to Flutter roles, freelance, and interesting problems.',
-            style: GruvboxText.muted(size: 12),
+            style: GruvboxText.muted(size: 13),
           ),
           const SizedBox(height: 16),
-          const Wrap(
-            spacing: 10,
-            runSpacing: 10,
-            children: [
-              ContactCard(
-                label: 'EMAIL',
-                value: 'aritra.sanyal.official@gmail.com',
-                url: 'mailto:aritra.sanyal.official@gmail.com',
-              ),
-              ContactCard(
-                label: 'PHONE',
-                value: '+91 7980769212',
-              ),
-              ContactCard(
-                label: 'GITHUB',
-                value: 'github.com/AritraSanyal',
-                url: 'https://github.com/AritraSanyal',
-              ),
-              ContactCard(
-                label: 'LOCATION',
-                value: 'Jaipur, Rajasthan, India',
-              ),
-            ],
+          LayoutBuilder(
+            builder: (context, constraints) {
+              if (constraints.maxWidth < 600) {
+                return const Column(
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ContactCard(
+                            label: 'EMAIL',
+                            value: 'aritra.sanyal.official@gmail.com',
+                            url: 'mailto:aritra.sanyal.official@gmail.com',
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        Expanded(
+                          child: ContactCard(
+                            label: 'PHONE',
+                            value: '+91 7980769212',
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: ContactCard(
+                            label: 'GITHUB',
+                            value: 'github.com/AritraSanyal',
+                            url: 'https://github.com/AritraSanyal',
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        Expanded(
+                          child: ContactCard(
+                            label: 'LOCATION',
+                            value: 'Jaipur, Rajasthan, India',
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                );
+              }
+              return const Row(
+                children: [
+                  Expanded(
+                    child: ContactCard(
+                      label: 'EMAIL',
+                      value: 'aritra.sanyal.official@gmail.com',
+                      url: 'mailto:aritra.sanyal.official@gmail.com',
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: ContactCard(
+                      label: 'PHONE',
+                      value: '+91 7980769212',
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: ContactCard(
+                      label: 'GITHUB',
+                      value: 'github.com/AritraSanyal',
+                      url: 'https://github.com/AritraSanyal',
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: ContactCard(
+                      label: 'LOCATION',
+                      value: 'Jaipur, Rajasthan, India',
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
         ],
       ),
@@ -482,13 +561,12 @@ class _TerminalPageState extends State<TerminalPage>
 
   Widget _buildFooter(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    final t = ((width - 320) / (1200 - 320)).clamp(0.0, 1.0);
-    final horizontalPad = width < 600 ? 20.0 : t * 40 + 20;
+    final horizontalPad = width < 600 ? 20.0 : 64.0;
 
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: horizontalPad,
-        vertical: 18,
+        vertical: 20,
       ),
       decoration: const BoxDecoration(
         color: GruvboxColors.bgHard,
@@ -504,11 +582,11 @@ class _TerminalPageState extends State<TerminalPage>
         children: [
           Text(
             'Aritra Sanyal · portfolio.sh',
-            style: GruvboxText.footerLeft(),
+            style: GruvboxText.surface(size: 12),
           ),
           Text(
             '© 2026 · Built with Flutter Web',
-            style: GruvboxText.footerRight(),
+            style: GruvboxText.body(color: GruvboxColors.overlay, size: 11),
           ),
         ],
       ),

@@ -40,16 +40,22 @@ class GruvboxText {
 
   static TextStyle tag() => GoogleFonts.jetBrainsMono(
         color: GruvboxColors.yellow,
-        fontSize: 10,
-        letterSpacing: 0.2,
+        fontSize: 11,
+        letterSpacing: 0.18,
         height: 1.65,
       );
 
   static TextStyle infoLabel() => GoogleFonts.jetBrainsMono(
         color: GruvboxColors.muted,
         fontSize: 10,
-        letterSpacing: 0.14,
+        letterSpacing: 0.18,
         height: 1.65,
+      );
+
+  static TextStyle description({double size = 12}) => GoogleFonts.jetBrainsMono(
+        color: GruvboxColors.faded,
+        fontSize: size,
+        height: 1.75,
       );
 
   static TextStyle infoValue({double? size}) => GoogleFonts.jetBrainsMono(

@@ -18,7 +18,7 @@ class SkillCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 150,
-      padding: const EdgeInsets.all(12),
+      padding: const EdgeInsets.only(top: 14, bottom: 14, left: 16, right: 16),
       decoration: BoxDecoration(
         color: GruvboxColors.bg,
         border: Border.all(color: GruvboxColors.overlay),
@@ -30,7 +30,7 @@ class SkillCard extends StatelessWidget {
         children: [
           Text(
             name,
-            style: GruvboxText.body(color: GruvboxColors.cyan, size: 11),
+            style: GruvboxText.body(color: GruvboxColors.cyan, size: 12),
           ),
           const SizedBox(height: 8),
           ClipRRect(
@@ -58,7 +58,7 @@ class SkillCard extends StatelessWidget {
           const SizedBox(height: 4),
           Text(
             '$percent%',
-            style: GruvboxText.muted(size: 9),
+            style: GruvboxText.muted(size: 10),
           ),
         ],
       ),

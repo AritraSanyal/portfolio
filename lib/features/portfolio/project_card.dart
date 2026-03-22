@@ -19,8 +19,7 @@ class ProjectCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: const BoxConstraints(minWidth: 240),
-      padding: const EdgeInsets.all(18),
+      padding: const EdgeInsets.only(top: 22, bottom: 22, left: 24, right: 24),
       decoration: BoxDecoration(
         color: GruvboxColors.bg,
         border: Border.all(color: GruvboxColors.overlay),
@@ -36,18 +35,18 @@ class ProjectCard extends StatelessWidget {
               Expanded(
                 child: Text(
                   name,
-                  style: GruvboxText.body(color: GruvboxColors.yellow, size: 12)
+                  style: GruvboxText.body(color: GruvboxColors.yellow, size: 14)
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ),
-              Text(date, style: GruvboxText.surface()),
+              Text(date, style: GruvboxText.surface(size: 11)),
             ],
           ),
           const SizedBox(height: 10),
-          Text(desc, style: GruvboxText.faded()),
+          Text(desc, style: GruvboxText.description()),
           const SizedBox(height: 10),
           Text(stack,
-              style: GruvboxText.body(color: GruvboxColors.cyan, size: 10)),
+              style: GruvboxText.body(color: GruvboxColors.cyan, size: 11)),
         ],
       ),
     );
