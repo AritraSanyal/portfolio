@@ -2,12 +2,12 @@ class TerminalConstants {
   TerminalConstants._();
 
   // Terminal dimensions
-  static const double terminalMaxWidth = 640;
-  static const double terminalMaxHeight = 520;
-  static const double terminalWidthRatio = 0.88;
-  static const double terminalHeightRatio = 0.80;
-  static const double terminalMinWidth = 260;
-  static const double terminalMinHeight = 260;
+  static const double terminalMaxWidth = 950;
+  static const double terminalMaxHeight = 700;
+  static const double terminalWidthRatio = 0.92;
+  static const double terminalHeightRatio = 0.85;
+  static const double terminalMinWidth = 300;
+  static const double terminalMinHeight = 300;
 
   // Animation / timing
   static const int typewriterCharMs = 16;

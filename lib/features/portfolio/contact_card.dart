@@ -35,9 +35,11 @@ class ContactCard extends StatelessWidget {
             const SizedBox(height: 4),
             Text(
               value,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               style: url != null
-                  ? GruvboxText.link(size: 13)
-                  : GruvboxText.infoValue(size: 13),
+                  ? GruvboxText.link(size: 12)
+                  : GruvboxText.infoValue(size: 12),
             ),
           ],
         ),

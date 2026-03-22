@@ -228,21 +228,22 @@ class _TerminalPageState extends State<TerminalPage>
         children: [
           Text(
             'Aritra Sanyal',
-            style: GruvboxText.body(color: GruvboxColors.body, size: 32)
+            style: GruvboxText.body(color: GruvboxColors.body, size: 48)
                 .copyWith(fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 6),
           Text(
             'Flutter Developer · E-Cell President · Ships things that work.',
-            style: GruvboxText.muted(size: 13),
+            style: GruvboxText.muted(size: 20),
           ),
           const SizedBox(height: 22),
           const Divider(height: 1, color: GruvboxColors.overlay),
           const SizedBox(height: 22),
           LayoutBuilder(
             builder: (context, constraints) {
-              if (constraints.maxWidth < 600) {
+              if (constraints.maxWidth < 900) {
                 return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     _buildAboutLeft(),
                     const SizedBox(height: 22),
@@ -252,11 +253,10 @@ class _TerminalPageState extends State<TerminalPage>
               }
               return Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Flexible(child: _buildAboutLeft()),
+                  Expanded(child: _buildAboutLeft()),
                   const SizedBox(width: 48),
-                  Flexible(child: _buildAboutRight()),
+                  Expanded(child: _buildAboutRight()),
                 ],
               );
             },
@@ -358,33 +358,56 @@ class _TerminalPageState extends State<TerminalPage>
         children: [
           Text(
             'Technical Stack',
-            style: GruvboxText.body(color: GruvboxColors.body, size: 20)
+            style: GruvboxText.body(color: GruvboxColors.body, size: 30)
                 .copyWith(fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
-          const Wrap(
-            spacing: 10,
-            runSpacing: 10,
-            children: [
-              SkillCard(
-                  name: 'Flutter', percent: 90, color: GruvboxColors.green),
-              SkillCard(name: 'Dart', percent: 90, color: GruvboxColors.green),
-              SkillCard(
-                  name: 'Firebase', percent: 80, color: GruvboxColors.blue),
-              SkillCard(
-                  name: 'REST APIs', percent: 80, color: GruvboxColors.blue),
-              SkillCard(
-                  name: 'Android/iOS', percent: 70, color: GruvboxColors.cyan),
-              SkillCard(name: 'Python', percent: 70, color: GruvboxColors.cyan),
-              SkillCard(
-                  name: 'PyTorch/HF', percent: 60, color: GruvboxColors.yellow),
-              SkillCard(
-                  name: 'Git/CI·CD', percent: 85, color: GruvboxColors.green),
-              SkillCard(
-                  name: 'SQLite/Mongo', percent: 65, color: GruvboxColors.cyan),
-              SkillCard(
-                  name: 'State Mgmt', percent: 80, color: GruvboxColors.blue),
-            ],
+          LayoutBuilder(
+            builder: (context, constraints) {
+              final isDesktop = constraints.maxWidth >= 900;
+              return GridView.count(
+                crossAxisCount: isDesktop ? 5 : 2,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                childAspectRatio: isDesktop ? 2.0 : 2.2,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                children: const [
+                  SkillCard(
+                      name: 'Flutter', percent: 90, color: GruvboxColors.green),
+                  SkillCard(
+                      name: 'Dart', percent: 90, color: GruvboxColors.green),
+                  SkillCard(
+                      name: 'Firebase', percent: 80, color: GruvboxColors.blue),
+                  SkillCard(
+                      name: 'REST APIs',
+                      percent: 80,
+                      color: GruvboxColors.blue),
+                  SkillCard(
+                      name: 'Android/iOS',
+                      percent: 70,
+                      color: GruvboxColors.cyan),
+                  SkillCard(
+                      name: 'Python', percent: 70, color: GruvboxColors.cyan),
+                  SkillCard(
+                      name: 'PyTorch/HF',
+                      percent: 60,
+                      color: GruvboxColors.yellow),
+                  SkillCard(
+                      name: 'Git/CI·CD',
+                      percent: 85,
+                      color: GruvboxColors.green),
+                  SkillCard(
+                      name: 'SQLite/Mongo',
+                      percent: 65,
+                      color: GruvboxColors.cyan),
+                  SkillCard(
+                      name: 'State Mgmt',
+                      percent: 80,
+                      color: GruvboxColors.blue),
+                ],
+              );
+            },
           ),
         ],
       ),
@@ -399,13 +422,13 @@ class _TerminalPageState extends State<TerminalPage>
         children: [
           Text(
             'Shipped Work',
-            style: GruvboxText.body(color: GruvboxColors.body, size: 20)
+            style: GruvboxText.body(color: GruvboxColors.body, size: 30)
                 .copyWith(fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 16),
           LayoutBuilder(
             builder: (context, constraints) {
-              if (constraints.maxWidth < 600) {
+              if (constraints.maxWidth < 900) {
                 return const Column(
                   children: [
                     ProjectCard(
@@ -415,7 +438,7 @@ class _TerminalPageState extends State<TerminalPage>
                           'Flutter + Gemini AI generating personalized ad copy from text prompts. 92% code reuse across Android & iOS, cut dev time by 40%.',
                       stack: 'Flutter · Dart · Gemini API · Firebase',
                     ),
-                    SizedBox(height: 12),
+                    SizedBox(height: 14),
                     ProjectCard(
                       name: 'Mesure — Health App',
                       date: 'Jan 2025',
@@ -435,10 +458,10 @@ class _TerminalPageState extends State<TerminalPage>
                       date: 'Aug 2024',
                       desc:
                           'Flutter + Gemini AI generating personalized ad copy from text prompts. 92% code reuse across Android & iOS, cut dev time by 40%.',
-                      stack: 'Flutter · Dart · Firebase API · Firebase',
+                      stack: 'Flutter · Dart · Gemini API · Firebase',
                     ),
                   ),
-                  SizedBox(width: 12),
+                  SizedBox(width: 14),
                   Expanded(
                     child: ProjectCard(
                       name: 'Mesure — Health App',
@@ -465,58 +488,64 @@ class _TerminalPageState extends State<TerminalPage>
         children: [
           Text(
             'Get In Touch',
-            style: GruvboxText.body(color: GruvboxColors.body, size: 20)
+            style: GruvboxText.body(color: GruvboxColors.body, size: 30)
                 .copyWith(fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 6),
           Text(
             'Open to Flutter roles, freelance, and interesting problems.',
-            style: GruvboxText.muted(size: 13),
+            style: GruvboxText.muted(size: 20),
           ),
           const SizedBox(height: 16),
           LayoutBuilder(
             builder: (context, constraints) {
-              if (constraints.maxWidth < 600) {
-                return const Column(
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          child: ContactCard(
-                            label: 'EMAIL',
-                            value: 'aritra.sanyal.official@gmail.com',
-                            url: 'mailto:aritra.sanyal.official@gmail.com',
-                          ),
+              if (constraints.maxWidth < 900) {
+                return IntrinsicHeight(
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: ContactCard(
+                                label: 'EMAIL',
+                                value: 'aritra.sanyal@gmail.com',
+                                url: 'mailto:aritra.sanyal.official@gmail.com',
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: ContactCard(
+                                label: 'PHONE',
+                                value: '+91 7980769212',
+                              ),
+                            ),
+                          ],
                         ),
-                        SizedBox(width: 10),
-                        Expanded(
-                          child: ContactCard(
-                            label: 'PHONE',
-                            value: '+91 7980769212',
-                          ),
+                      ),
+                      const SizedBox(height: 12),
+                      Expanded(
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: ContactCard(
+                                label: 'GITHUB',
+                                value: 'github.com/AritraSanyal',
+                                url: 'https://github.com/AritraSanyal',
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: ContactCard(
+                                label: 'LOCATION',
+                                value: 'Jaipur, Rajasthan, India',
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                    SizedBox(height: 10),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: ContactCard(
-                            label: 'GITHUB',
-                            value: 'github.com/AritraSanyal',
-                            url: 'https://github.com/AritraSanyal',
-                          ),
-                        ),
-                        SizedBox(width: 10),
-                        Expanded(
-                          child: ContactCard(
-                            label: 'LOCATION',
-                            value: 'Jaipur, Rajasthan, India',
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                      ),
+                    ],
+                  ),
                 );
               }
               return const Row(
@@ -524,18 +553,18 @@ class _TerminalPageState extends State<TerminalPage>
                   Expanded(
                     child: ContactCard(
                       label: 'EMAIL',
-                      value: 'aritra.sanyal.official@gmail.com',
+                      value: 'aritra.sanyal@gmail.com',
                       url: 'mailto:aritra.sanyal.official@gmail.com',
                     ),
                   ),
-                  SizedBox(width: 10),
+                  SizedBox(width: 12),
                   Expanded(
                     child: ContactCard(
                       label: 'PHONE',
                       value: '+91 7980769212',
                     ),
                   ),
-                  SizedBox(width: 10),
+                  SizedBox(width: 12),
                   Expanded(
                     child: ContactCard(
                       label: 'GITHUB',
@@ -543,7 +572,7 @@ class _TerminalPageState extends State<TerminalPage>
                       url: 'https://github.com/AritraSanyal',
                     ),
                   ),
-                  SizedBox(width: 10),
+                  SizedBox(width: 12),
                   Expanded(
                     child: ContactCard(
                       label: 'LOCATION',
@@ -561,9 +590,10 @@ class _TerminalPageState extends State<TerminalPage>
 
   Widget _buildFooter(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    final horizontalPad = width < 600 ? 20.0 : 64.0;
+    final horizontalPad = width < 900 ? 20.0 : 64.0;
 
     return Container(
+      width: double.infinity,
       padding: EdgeInsets.symmetric(
         horizontal: horizontalPad,
         vertical: 20,
@@ -577,7 +607,7 @@ class _TerminalPageState extends State<TerminalPage>
       child: Wrap(
         spacing: 12,
         runSpacing: 8,
-        alignment: WrapAlignment.spaceBetween,
+        alignment: WrapAlignment.center,
         crossAxisAlignment: WrapCrossAlignment.center,
         children: [
           Text(

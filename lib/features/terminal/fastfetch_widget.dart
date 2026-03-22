@@ -104,7 +104,7 @@ class FastfetchBuilder {
           text: TextSpan(
             text:
                 "Type 'help' for commands. 'ls' to explore. 'cat <file>' to read.",
-            style: GruvboxText.body(color: GruvboxColors.faded),
+            style: GruvboxText.terminal(color: GruvboxColors.faded),
           ),
         ),
         const SizedBox(height: 8),
@@ -189,12 +189,12 @@ class FastfetchDisplay extends StatelessWidget {
         if (i > lastEnd) {
           spans.add(TextSpan(
             text: row.substring(lastEnd, i),
-            style: GruvboxText.body(color: GruvboxColors.cyan, size: 11),
+            style: GruvboxText.terminal(color: GruvboxColors.cyan, size: 13),
           ));
         }
         spans.add(TextSpan(
           text: char,
-          style: GruvboxText.body(color: const Color(0xFFfe8019), size: 11),
+          style: GruvboxText.terminal(color: const Color(0xFFfe8019), size: 13),
         ));
         lastEnd = i + 1;
       }
@@ -203,13 +203,13 @@ class FastfetchDisplay extends StatelessWidget {
     if (lastEnd < row.length) {
       spans.add(TextSpan(
         text: row.substring(lastEnd),
-        style: GruvboxText.body(color: GruvboxColors.cyan, size: 11),
+        style: GruvboxText.terminal(color: GruvboxColors.cyan, size: 13),
       ));
     }
 
     if (spans.isEmpty) {
       return RichText(
-          text: TextSpan(text: ' ', style: GruvboxText.body(size: 11)));
+          text: TextSpan(text: ' ', style: GruvboxText.terminal(size: 13)));
     }
 
     return RichText(text: TextSpan(children: spans));
@@ -223,11 +223,11 @@ class FastfetchDisplay extends StatelessWidget {
           children: [
             TextSpan(
               text: '${line.substring(0, colonIndex + 1)} ',
-              style: GruvboxText.body(color: GruvboxColors.cyan),
+              style: GruvboxText.terminal(color: GruvboxColors.cyan),
             ),
             TextSpan(
               text: line.substring(colonIndex + 1).trimLeft(),
-              style: GruvboxText.body(color: GruvboxColors.body),
+              style: GruvboxText.terminal(color: GruvboxColors.body),
             ),
           ],
         ),
@@ -237,14 +237,14 @@ class FastfetchDisplay extends StatelessWidget {
       return RichText(
         text: TextSpan(
           text: line,
-          style: GruvboxText.body(color: GruvboxColors.surface),
+          style: GruvboxText.terminal(color: GruvboxColors.surface),
         ),
       );
     }
     return RichText(
       text: TextSpan(
         text: line,
-        style: GruvboxText.body(color: GruvboxColors.yellow),
+        style: GruvboxText.terminal(color: GruvboxColors.yellow),
       ),
     );
   }

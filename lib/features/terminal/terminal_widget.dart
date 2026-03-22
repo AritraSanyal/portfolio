@@ -81,7 +81,8 @@ class _TitleBar extends StatelessWidget {
           // Centered title
           Text(
             'visitor@portfolio ~/portfolio',
-            style: GruvboxText.body(color: const Color(0xFF7c6f64), size: 10),
+            style:
+                GruvboxText.terminal(color: const Color(0xFF7c6f64), size: 12),
           ),
         ],
       ),

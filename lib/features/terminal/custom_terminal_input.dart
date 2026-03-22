@@ -110,14 +110,14 @@ class _CustomTerminalInputState extends State<CustomTerminalInput> {
         children: [
           TextSpan(
             text: 'visitor@portfolio',
-            style: GruvboxText.body(color: GruvboxColors.green),
+            style: GruvboxText.terminal(color: GruvboxColors.green),
           ),
-          TextSpan(text: ':', style: GruvboxText.body()),
+          TextSpan(text: ':', style: GruvboxText.terminal()),
           TextSpan(
             text: '~/portfolio',
-            style: GruvboxText.body(color: GruvboxColors.blue),
+            style: GruvboxText.terminal(color: GruvboxColors.blue),
           ),
-          TextSpan(text: r'$ ', style: GruvboxText.body()),
+          TextSpan(text: r'$ ', style: GruvboxText.terminal()),
         ],
       ),
     );
@@ -172,7 +172,7 @@ class _CustomTerminalInputState extends State<CustomTerminalInput> {
                         controller: _textController,
                         focusNode: _focusNode,
                         autofocus: true,
-                        style: GruvboxText.body(),
+                        style: GruvboxText.terminal(),
                         cursorColor: GruvboxColors.body,
                         backgroundCursorColor: GruvboxColors.bgHard,
                         maxLines: 1,
@@ -204,11 +204,11 @@ class _GhostSuggestion extends StatelessWidget {
           children: [
             TextSpan(
               text: typed,
-              style: GruvboxText.body(color: Colors.transparent),
+              style: GruvboxText.terminal(color: Colors.transparent),
             ),
             TextSpan(
               text: ghost,
-              style: GruvboxText.body(color: GruvboxColors.surface),
+              style: GruvboxText.terminal(color: GruvboxColors.surface),
             ),
           ],
         ),

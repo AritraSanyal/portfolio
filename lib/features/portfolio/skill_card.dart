@@ -17,7 +17,6 @@ class SkillCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 150,
       padding: const EdgeInsets.only(top: 14, bottom: 14, left: 16, right: 16),
       decoration: BoxDecoration(
         color: GruvboxColors.bg,
