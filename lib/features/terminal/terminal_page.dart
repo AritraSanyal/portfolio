@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../../config/colors.dart';
 import '../../commands/command_registry.dart';
 import '../../commands/builtin_commands.dart';
+import '../../widgets/dot_grid_background.dart';
 import 'fastfetch_widget.dart';
 import 'terminal_controller.dart';
 import 'terminal_widget.dart';
@@ -28,19 +29,21 @@ class _TerminalPageState extends State<TerminalPage> {
 
   CommandRegistry _buildRegistry() {
     final reg = CommandRegistry();
-    reg.register('ls',     LsCommand());
-    reg.register('cat',    CatCommand());
-    reg.register('open',   OpenCommand());
-    reg.register('pwd',    PwdCommand());
+    reg.register('ls', LsCommand());
+    reg.register('cat', CatCommand());
+    reg.register('open', OpenCommand());
+    reg.register('pwd', PwdCommand());
     reg.register('whoami', WhoamiCommand());
-    reg.register('echo',   EchoCommand());
-    reg.register('clear',  ClearCommand());
-    reg.register('git',    GitLogCommand());
-    reg.register('vim',    VimCommand());
-    reg.register('man',    ManCommand());
-    reg.register('sudo',   SudoCommand());
-    reg.register('cd',     CdCommand());
-    reg.register('help',   HelpCommand());
+    reg.register('echo', EchoCommand());
+    reg.register('clear', ClearCommand());
+    reg.register('git', GitLogCommand());
+    reg.register('vim', VimCommand());
+    reg.register('man', ManCommand());
+    reg.register('sudo', SudoCommand());
+    reg.register('cd', CdCommand());
+    reg.register('help', HelpCommand());
+    reg.register('fastfetch', FastfetchCommand());
+    reg.register('exit', ExitCommand());
     return reg;
   }
 
@@ -58,11 +61,8 @@ class _TerminalPageState extends State<TerminalPage> {
         backgroundColor: GruvboxColors.bg,
         body: Stack(
           children: [
-            // Page background
-            const ColoredBox(
-              color: GruvboxColors.bg,
-              child: SizedBox.expand(),
-            ),
+            // Dot grid background
+            const DotGridBackground(),
             // Centered terminal
             const Center(child: TerminalWidget()),
             // Fastfetch trigger (invisible, fires once)

@@ -30,7 +30,8 @@ class WhoamiCommand implements CommandHandler {
   Future<List<Widget>> execute(List<String> args) async {
     return [
       // TODO: Replace with your name and tagline
-      _simple('TODO_NAME — Flutter dev who ships things.', color: GruvboxColors.green),
+      _simple('TODO_NAME — Flutter dev who ships things.',
+          color: GruvboxColors.green),
     ];
   }
 }
@@ -84,14 +85,23 @@ class CatCommand implements CommandHandler {
       case 'contact.md':
         return buildContact();
       case 'resume.pdf':
-        return [_simple("Use 'open resume.pdf' to open it in your browser.", color: GruvboxColors.yellow)];
+        return [
+          _simple("Use 'open resume.pdf' to open it in your browser.",
+              color: GruvboxColors.yellow)
+        ];
       case '.secret':
         return buildEasterEggs()['cat .secret'] ?? [];
       default:
         if (VirtualFS.exists(filename)) {
-          return [_simple('cat: $filename: No reader available', color: GruvboxColors.red)];
+          return [
+            _simple('cat: $filename: No reader available',
+                color: GruvboxColors.red)
+          ];
         }
-        return [_simple('cat: $filename: No such file or directory', color: GruvboxColors.red)];
+        return [
+          _simple('cat: $filename: No such file or directory',
+              color: GruvboxColors.red)
+        ];
     }
   }
 }
@@ -111,7 +121,9 @@ class OpenCommand implements CommandHandler {
         await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
         return [_simple('Opening resume.pdf...', color: GruvboxColors.green)];
       } catch (_) {
-        return [_simple('open: could not open resume.pdf', color: GruvboxColors.red)];
+        return [
+          _simple('open: could not open resume.pdf', color: GruvboxColors.red)
+        ];
       }
     }
     return [_simple('open: ${args[0]}: no handler', color: GruvboxColors.red)];
@@ -145,9 +157,13 @@ class ManCommand implements CommandHandler {
       return buildEasterEggs()['man cat'] ?? [];
     }
     if (args.isEmpty) {
-      return [_simple('What manual page do you want?', color: GruvboxColors.yellow)];
+      return [
+        _simple('What manual page do you want?', color: GruvboxColors.yellow)
+      ];
     }
-    return [_simple('No manual entry for ${args[0]}', color: GruvboxColors.red)];
+    return [
+      _simple('No manual entry for ${args[0]}', color: GruvboxColors.red)
+    ];
   }
 }
 
@@ -178,5 +194,23 @@ class HelpCommand implements CommandHandler {
   @override
   Future<List<Widget>> execute(List<String> args) async {
     return buildEasterEggs()['help'] ?? [];
+  }
+}
+
+// ── fastfetch ─────────────────────────────────────────────────────────────────
+
+class FastfetchCommand implements CommandHandler {
+  @override
+  Future<List<Widget>> execute(List<String> args) async {
+    return [];
+  }
+}
+
+// ── exit ──────────────────────────────────────────────────────────────────────
+
+class ExitCommand implements CommandHandler {
+  @override
+  Future<List<Widget>> execute(List<String> args) async {
+    return [];
   }
 }
