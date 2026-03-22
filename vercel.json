@@ -1,6 +1,6 @@
 {
-  "framework": "flutter-web",
-  "buildCommand": "flutter build web",
+  "framework": null,
+  "buildCommand": "./build.sh",
   "outputDirectory": "build/web",
-  "installCommand": "flutter pub get"
+  "installCommand": "chmod +x build.sh"
 }
