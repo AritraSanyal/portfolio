@@ -1,17 +1,41 @@
-# portfolio
+# portfolio.sh
 
-A new Flutter project.
+A terminal-style portfolio website built with Flutter Web.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
+- Interactive terminal UI with Gruvbox dark theme
+- Commands: `ls`, `cat`, `whoami`, `echo`, `clear`, `help`, `fastfetch`, `git log`, and more
+- Tab autocomplete with cycling through suggestions
+- Arrow key history navigation
+- Cinematic glitch loading screen
+- Responsive fastfetch display
+- Easter eggs hidden throughout
 
-A few resources to get you started if this is your first Flutter project:
+## Tech Stack
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+- Flutter 3.x (Web)
+- Dart
+- Gruvbox color palette
+- JetBrains Mono font
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Commands
+
+```bash
+# Run locally
+flutter run -d chrome
+
+# Build for web
+flutter build web
+```
+
+## Deployment
+
+Deployed on Vercel with auto-deploy on every push to `main`.
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/import?repository-url=https://github.com/AritraSanyal/portfolio)
+
+## Connect
+
+- GitHub: [github.com/AritraSanyal](https://github.com/AritraSanyal)
+- Email: aritra.sanyal.official@gmail.com
