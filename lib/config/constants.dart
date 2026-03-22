@@ -2,10 +2,10 @@ class TerminalConstants {
   TerminalConstants._();
 
   // Terminal dimensions
-  static const double terminalMaxWidth = 640;
-  static const double terminalMaxHeight = 520;
-  static const double terminalWidthRatio = 0.88;
-  static const double terminalHeightRatio = 0.80;
+  static const double terminalMaxWidth = 700;
+  static const double terminalMaxHeight = 620;
+  static const double terminalWidthRatio = 0.70;
+  static const double terminalHeightRatio = 0.58;
   static const double terminalMinWidth = 260;
   static const double terminalMinHeight = 260;
 

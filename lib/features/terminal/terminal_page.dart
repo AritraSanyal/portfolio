@@ -113,20 +113,27 @@ class _TerminalPageState extends State<TerminalPage>
       value: _controller,
       child: Scaffold(
         backgroundColor: GruvboxColors.bg,
-        body: SingleChildScrollView(
-          controller: _scrollController,
-          child: Column(
-            children: [
-              _buildHero(context),
-              _buildBounceArrow(),
-              _buildScrollCrossover(context),
-              _buildAboutSection(context),
-              _buildSkillsSection(),
-              _buildProjectsSection(),
-              _buildContactSection(),
-              _buildFooter(context),
-            ],
-          ),
+        body: LayoutBuilder(
+          builder: (context, constraints) {
+            final scale = constraints.maxWidth > 400 ? 1.15 : 1.0;
+            return Transform.scale(
+              scale: scale,
+              alignment: Alignment.center,
+              child: SingleChildScrollView(
+                controller: _scrollController,
+                child: Column(
+                  children: [
+                    _buildHero(context),
+                    _buildAboutSection(context),
+                    _buildSkillsSection(),
+                    _buildProjectsSection(),
+                    _buildContactSection(),
+                    _buildFooter(context),
+                  ],
+                ),
+              ),
+            );
+          },
         ),
       ),
     );
@@ -142,11 +149,41 @@ class _TerminalPageState extends State<TerminalPage>
             child: const SizedBox.expand(),
           ),
           Center(
-            child: AnimatedScale(
-              scale: _currentScale,
-              duration: const Duration(milliseconds: 140),
-              curve: Curves.easeOut,
-              child: const TerminalWidget(),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                AnimatedScale(
+                  scale: _currentScale,
+                  duration: const Duration(milliseconds: 140),
+                  curve: Curves.easeOut,
+                  child: const TerminalWidget(),
+                ),
+                const SizedBox(height: 16),
+                AnimatedBuilder(
+                  animation: _bounceController,
+                  builder: (context, child) {
+                    return Transform.translate(
+                      offset: Offset(0, 9 * _bounceController.value),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            width: 14,
+                            height: 1.5,
+                            color: GruvboxColors.yellow,
+                          ),
+                          const SizedBox(height: 5),
+                          Container(
+                            width: 8,
+                            height: 1.5,
+                            color: GruvboxColors.yellow.withAlpha(89),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ],
             ),
           ),
           if (_showScalePill)
@@ -187,81 +224,6 @@ class _TerminalPageState extends State<TerminalPage>
                 },
               ),
             ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildBounceArrow() {
-    return Container(
-      color: GruvboxColors.bg,
-      padding: const EdgeInsets.only(top: 14),
-      child: Center(
-        child: AnimatedBuilder(
-          animation: _bounceController,
-          builder: (context, child) {
-            return Transform.translate(
-              offset: Offset(0, 9 * _bounceController.value),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    width: 14,
-                    height: 1.5,
-                    color: GruvboxColors.yellow,
-                  ),
-                  const SizedBox(height: 5),
-                  Container(
-                    width: 8,
-                    height: 1.5,
-                    color: GruvboxColors.yellow.withAlpha(89),
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
-      ),
-    );
-  }
-
-  Widget _buildScrollCrossover(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-    final fontSize = (width * 0.20).clamp(80.0, 160.0);
-    final letterSpacing = width * 0.014;
-
-    return Container(
-      margin: const EdgeInsets.only(top: 10),
-      height: fontSize,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            height: fontSize / 2,
-            child: Container(color: GruvboxColors.bg),
-          ),
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            height: fontSize / 2,
-            child: Container(color: GruvboxColors.bgHard),
-          ),
-          Center(
-            child: Text(
-              'SCROLL',
-              style: TextStyle(
-                fontFamily: 'JetBrains Mono',
-                fontSize: fontSize,
-                fontWeight: FontWeight.w700,
-                color: GruvboxColors.overlay,
-                letterSpacing: letterSpacing,
-              ),
-            ),
-          ),
         ],
       ),
     );

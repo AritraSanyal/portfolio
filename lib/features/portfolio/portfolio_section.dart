@@ -12,7 +12,7 @@ class PortfolioSection extends StatelessWidget {
     super.key,
     required this.tag,
     required this.child,
-    this.showDivider = true,
+    this.showDivider = false,
   });
 
   @override
