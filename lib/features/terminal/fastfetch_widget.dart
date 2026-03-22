@@ -6,8 +6,13 @@ import 'terminal_controller.dart';
 
 class FastfetchWidget extends StatefulWidget {
   final TerminalController controller;
+  final VoidCallback? onComplete;
 
-  const FastfetchWidget({super.key, required this.controller});
+  const FastfetchWidget({
+    super.key,
+    required this.controller,
+    this.onComplete,
+  });
 
   @override
   State<FastfetchWidget> createState() => _FastfetchWidgetState();
@@ -31,6 +36,7 @@ class _FastfetchWidgetState extends State<FastfetchWidget> {
       onDone: () {
         if (!mounted) return;
         widget.controller.appendLines(FastfetchBuilder.buildFooter());
+        widget.onComplete?.call();
       },
     );
     _engine!.start();

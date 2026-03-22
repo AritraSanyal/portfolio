@@ -26,7 +26,7 @@ class _TerminalPageState extends State<TerminalPage>
     with TickerProviderStateMixin {
   late final CommandRegistry _registry;
   late final TerminalController _controller;
-  final bool _fastfetchDone = false;
+  bool _fastfetchDone = false;
 
   late final ScrollController _scrollController;
   double _currentScale = 1.0;
@@ -178,6 +178,13 @@ class _TerminalPageState extends State<TerminalPage>
             Positioned.fill(
               child: FastfetchWidget(
                 controller: _controller,
+                onComplete: () {
+                  if (mounted) {
+                    setState(() {
+                      _fastfetchDone = true;
+                    });
+                  }
+                },
               ),
             ),
         ],
