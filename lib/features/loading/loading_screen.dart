@@ -140,37 +140,40 @@ class _LoadingScreenState extends State<LoadingScreen>
             fit: StackFit.expand,
             children: [
               Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      'portfolio.sh',
-                      style: GruvboxText.body(
-                        color: GruvboxColors.yellow,
-                        size: 13,
+                child: Transform.scale(
+                  scale: 1.5,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'portfolio.sh',
+                        style: GruvboxText.body(
+                          color: GruvboxColors.yellow,
+                          size: 13,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 16),
-                    GlitchBar(state: state, width: barW),
-                    const SizedBox(height: 12),
-                    Opacity(
-                      opacity: safeStatusOpacity,
-                      child: Text(
-                        '$statusText $fontStatus',
-                        style: GruvboxText.muted(size: 11),
+                      const SizedBox(height: 16),
+                      GlitchBar(state: state, width: barW),
+                      const SizedBox(height: 12),
+                      Opacity(
+                        opacity: safeStatusOpacity,
+                        child: Text(
+                          '$statusText $fontStatus',
+                          style: GruvboxText.muted(size: 11),
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 16),
-                    Opacity(
-                      opacity: safeSkipHintOpacity,
-                      child: Text(
-                        ready
-                            ? 'Press Enter or click to continue'
-                            : 'Press Enter or click to skip',
-                        style: GruvboxText.muted(size: 10),
+                      const SizedBox(height: 16),
+                      Opacity(
+                        opacity: safeSkipHintOpacity,
+                        child: Text(
+                          ready
+                              ? 'Press Enter or click to continue'
+                              : 'Press Enter or click to skip',
+                          style: GruvboxText.muted(size: 10),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
               if (safeOverlayOpacity > 0)

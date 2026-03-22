@@ -64,7 +64,12 @@ class _TerminalPageState extends State<TerminalPage> {
             // Dot grid background
             const DotGridBackground(),
             // Centered terminal
-            const Center(child: TerminalWidget()),
+            Center(
+              child: Transform.scale(
+                scale: 1.5,
+                child: const TerminalWidget(),
+              ),
+            ),
             // Fastfetch trigger (invisible, fires once)
             if (!_fastfetchDone)
               Positioned.fill(

@@ -115,8 +115,8 @@ class OpenCommand implements CommandHandler {
       return [_simple('open: missing argument', color: GruvboxColors.red)];
     }
     if (args[0].toLowerCase() == 'resume.pdf') {
-      // TODO: Replace TODO_RESUME_URL with your actual hosted resume PDF URL
-      const url = 'https://TODO_RESUME_URL';
+      const url =
+          'https://drive.google.com/uc?export=download&id=1W-c-V_WlJRwpJnir8KakdPOs9ZsjaHSt';
       try {
         await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
         return [_simple('Opening resume.pdf...', color: GruvboxColors.green)];
