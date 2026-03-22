@@ -130,7 +130,7 @@ class _InputRowState extends State<InputRow> {
     return Container(
       height: TerminalConstants.inputRowHeight,
       decoration: const BoxDecoration(
-        color: GruvboxColors.bg_hard,
+        color: GruvboxColors.bgHard,
         border: Border(
           top: BorderSide(color: GruvboxColors.overlay, width: 1),
         ),
@@ -154,7 +154,7 @@ class _InputRowState extends State<InputRow> {
                   autofocus: true,
                   style: GruvboxText.body(),
                   cursorColor: GruvboxColors.body,
-                  backgroundCursorColor: GruvboxColors.bg_hard,
+                  backgroundCursorColor: GruvboxColors.bgHard,
                   obscureText: false,
                   maxLines: 1,
                   onChanged: (value) => _onTextChanged(),

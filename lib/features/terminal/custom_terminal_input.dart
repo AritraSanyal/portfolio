@@ -148,7 +148,7 @@ class _CustomTerminalInputState extends State<CustomTerminalInput> {
           return Container(
             height: TerminalConstants.inputRowHeight,
             decoration: const BoxDecoration(
-              color: GruvboxColors.bg_hard,
+              color: GruvboxColors.bgHard,
               border: Border(
                 top: BorderSide(color: GruvboxColors.overlay, width: 1),
               ),
@@ -174,7 +174,7 @@ class _CustomTerminalInputState extends State<CustomTerminalInput> {
                         autofocus: true,
                         style: GruvboxText.body(),
                         cursorColor: GruvboxColors.body,
-                        backgroundCursorColor: GruvboxColors.bg_hard,
+                        backgroundCursorColor: GruvboxColors.bgHard,
                         maxLines: 1,
                         onSubmitted: _submit,
                       ),

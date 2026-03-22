@@ -25,12 +25,12 @@ class TerminalWidget extends StatelessWidget {
           width: width,
           height: height,
           decoration: BoxDecoration(
-            color: GruvboxColors.bg_hard,
+            color: GruvboxColors.bgHard,
             borderRadius: BorderRadius.circular(10),
             border: Border.all(color: GruvboxColors.surface, width: 1),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.6),
+                color: Colors.black.withAlpha(153),
                 blurRadius: 32,
                 offset: const Offset(0, 12),
               ),
@@ -70,7 +70,7 @@ class _TitleBar extends StatelessWidget {
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                _dot(GruvboxColors.red_dark),
+                _dot(GruvboxColors.redDark),
                 const SizedBox(width: 6),
                 _dot(const Color(0xFFd79921)),
                 const SizedBox(width: 6),

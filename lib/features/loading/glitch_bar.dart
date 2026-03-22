@@ -1,7 +1,6 @@
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import '../../config/colors.dart';
-import '../../config/constants.dart';
 import 'loading_controller.dart';
 
 class GlitchBar extends StatelessWidget {

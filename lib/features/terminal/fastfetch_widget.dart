@@ -83,7 +83,7 @@ class FastfetchBuilder {
   ];
 
   static FastfetchDisplay buildDisplay() {
-    return FastfetchDisplay(
+    return const FastfetchDisplay(
       artRows: _artRows,
       infoLines: _infoLines,
       breakpoint: _breakpoint,
