@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:web/web.dart' as web;
 import '../../commands/command_registry.dart';
 import '../../config/colors.dart';
 import '../../config/text_styles.dart';
@@ -94,9 +95,13 @@ class TerminalController extends ChangeNotifier {
   }
 
   void showFastfetch() {
-    final lines = FastfetchLines.buildLines();
+    final lines = FastfetchBuilder.buildLines();
     appendLines(lines);
-    appendLines(FastfetchLines.footer());
+    appendLines(FastfetchBuilder.buildFooter());
+  }
+
+  void _closeTab() {
+    web.window.close();
   }
 
   // ── Input Handling ───────────────────────────────────────────────────────────
@@ -122,6 +127,11 @@ class TerminalController extends ChangeNotifier {
 
     if (cmd == 'fastfetch') {
       showFastfetch();
+      return;
+    }
+
+    if (cmd == 'exit') {
+      _closeTab();
       return;
     }
 

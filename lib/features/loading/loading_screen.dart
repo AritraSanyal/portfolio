@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../config/colors.dart';
@@ -19,12 +20,17 @@ class _LoadingScreenState extends State<LoadingScreen>
   late AnimationController _controller;
   bool _navigated = false;
   bool _skipRequested = false;
-  bool _isReady = false;
+  bool _fontsLoaded = false;
   final FocusNode _skipFocus = FocusNode();
+
+  static const double _minDisplaySec = 2.0;
+  DateTime? _startTime;
 
   @override
   void initState() {
     super.initState();
+    _startTime = DateTime.now();
+
     _controller = AnimationController(
       vsync: this,
       duration: Duration(
@@ -34,9 +40,25 @@ class _LoadingScreenState extends State<LoadingScreen>
       ..addListener(_onAnimationUpdate)
       ..forward();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      setState(() => _isReady = true);
-    });
+    _loadFonts();
+  }
+
+  Future<void> _loadFonts() async {
+    try {
+      final fontLoader = FontLoader('JetBrains Mono');
+      fontLoader.addFont(() async {
+        final fontData = await rootBundle
+            .load('packages/google_fonts/fonts/JetBrainsMono-Regular.ttf');
+        return fontData.buffer.asByteData()!;
+      }());
+      await fontLoader.load();
+    } catch (e) {
+      debugPrint('Font loading error: $e');
+    }
+
+    if (mounted) {
+      setState(() => _fontsLoaded = true);
+    }
   }
 
   void _onAnimationUpdate() {
@@ -44,7 +66,12 @@ class _LoadingScreenState extends State<LoadingScreen>
     setState(() {});
 
     final t = _controller.value;
-    final shouldNavigate = _skipRequested || (t >= 0.4 && _isReady) || t >= 1.0;
+    final elapsed =
+        DateTime.now().difference(_startTime!).inMilliseconds / 1000.0;
+    final minTimePassed = elapsed >= _minDisplaySec;
+    final ready = minTimePassed && _fontsLoaded;
+
+    final shouldNavigate = _skipRequested || (ready && t >= 1.0);
 
     if (shouldNavigate && !_navigated) {
       _navigated = true;
@@ -72,7 +99,12 @@ class _LoadingScreenState extends State<LoadingScreen>
   @override
   Widget build(BuildContext context) {
     final t = _controller.value.clamp(0.0, 1.0);
-    final state = LoadingController.compute(t, isReady: _isReady);
+    final elapsed =
+        DateTime.now().difference(_startTime!).inMilliseconds / 1000.0;
+    final minTimePassed = elapsed >= _minDisplaySec;
+    final ready = minTimePassed && _fontsLoaded;
+
+    final state = LoadingController.compute(t, isReady: ready);
     final screenW = MediaQuery.of(context).size.width;
     final barW = (screenW * TerminalConstants.loadingBarWidthRatio)
         .clamp(0.0, TerminalConstants.loadingBarMaxWidth);
@@ -80,6 +112,15 @@ class _LoadingScreenState extends State<LoadingScreen>
     final safeStatusOpacity = state.statusOpacity.clamp(0.0, 1.0);
     final safeOverlayOpacity = state.overlayOpacity.clamp(0.0, 1.0);
     final safeSkipHintOpacity = state.skipHintOpacity.clamp(0.0, 1.0);
+
+    String statusText;
+    if (ready) {
+      statusText = 'Ready! Press Enter to continue or wait...';
+    } else {
+      statusText = '${state.statusText}';
+    }
+
+    final fontStatus = _fontsLoaded ? '[Done]' : '[Loading fonts...]';
 
     return GestureDetector(
       onTap: () => setState(() => _skipRequested = true),
@@ -114,7 +155,7 @@ class _LoadingScreenState extends State<LoadingScreen>
                     Opacity(
                       opacity: safeStatusOpacity,
                       child: Text(
-                        state.statusText,
+                        '$statusText $fontStatus',
                         style: GruvboxText.muted(size: 11),
                       ),
                     ),
@@ -122,7 +163,9 @@ class _LoadingScreenState extends State<LoadingScreen>
                     Opacity(
                       opacity: safeSkipHintOpacity,
                       child: Text(
-                        'Press Enter or click to skip',
+                        ready
+                            ? 'Press Enter or click to continue'
+                            : 'Press Enter or click to skip',
                         style: GruvboxText.muted(size: 10),
                       ),
                     ),

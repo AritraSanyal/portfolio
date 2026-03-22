@@ -58,6 +58,12 @@ class LoadingController {
   static LoadingState compute(double t, {bool isReady = false}) {
     final skipHintOpacity = t >= 0.33 ? _clamp((t - 0.33) / 0.17) : 0.0;
 
+    // Smooth progress based on actual t value (0-100%)
+    final displayProgress = (t * 100).round().toDouble();
+
+    // When ready, show progress at 100%
+    final progress = isReady ? 100.0 : displayProgress;
+
     // Phase 1: Boot (0.0 to 0.25)
     if (t < 0.25) {
       final local = _clamp(t / 0.25);
@@ -70,8 +76,8 @@ class LoadingController {
         ghostOpacity: 0,
         statusOpacity: 1.0,
         showGhosts: false,
-        statusText: '${(local * 20).round()}% -- Initializing portfolio.sh...',
-        progressPercent: local * 20,
+        statusText: '${progress.round()}% -- Loading fonts...',
+        progressPercent: isReady ? 100 : local * 20,
         fillColor: GruvboxColors.green,
         scaleZoom: 1.0,
         overlayOpacity: 0.0,
@@ -86,7 +92,6 @@ class LoadingController {
       final amplitude = 4.0 + local * 4.0;
       final shake = math.sin(t * 60) * amplitude;
       final pulse = _clamp(0.4 + 0.6 * ((math.sin(t * 20) + 1) / 2));
-      final pct = 20 + (local * 40).round();
       return LoadingState(
         phase: LoadingPhase.shaking,
         fillFraction: _clamp(0.20 + local * 0.40),
@@ -96,8 +101,8 @@ class LoadingController {
         ghostOpacity: 0,
         statusOpacity: pulse,
         showGhosts: false,
-        statusText: '$pct% -- Loading assets...',
-        progressPercent: pct.toDouble(),
+        statusText: '${progress.round()}% -- Initializing...',
+        progressPercent: isReady ? 100 : 20 + (local * 35),
         fillColor: GruvboxColors.yellow,
         scaleZoom: 1.0,
         overlayOpacity: 0.0,
@@ -115,7 +120,6 @@ class LoadingController {
       final blurS = local * 3.0;
       final shakeX = (_rng.nextDouble() * 28) - 14;
       final glitchIdx = (t * 30).floor() % _glitchFrames.length;
-      final pct = 60 + (local * 30).round();
       return LoadingState(
         phase: LoadingPhase.glitch,
         fillFraction: _clamp(0.60 + local * 0.30),
@@ -125,8 +129,8 @@ class LoadingController {
         ghostOpacity: 0.4,
         statusOpacity: 1.0,
         showGhosts: true,
-        statusText: '$pct% -- ${_glitchFrames[glitchIdx]}',
-        progressPercent: pct.toDouble(),
+        statusText: '${progress.round()}% -- ${_glitchFrames[glitchIdx]}',
+        progressPercent: isReady ? 100 : 55 + (local * 30),
         fillColor: fillColor,
         scaleZoom: 1.0,
         overlayOpacity: 0.0,
@@ -148,7 +152,7 @@ class LoadingController {
       statusOpacity: _clamp(1.0 - local),
       showGhosts: false,
       statusText: '100% -- Done.',
-      progressPercent: local * 10 + 90,
+      progressPercent: 100,
       fillColor: GruvboxColors.red_dark,
       scaleZoom: scale,
       overlayOpacity: _clamp(local),
