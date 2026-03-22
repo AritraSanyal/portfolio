@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:js_interop';
 import 'package:flutter/material.dart';
 import 'package:web/web.dart' as web;
 import '../../commands/command_registry.dart';
@@ -11,6 +12,8 @@ import '../../widgets/typewriter_engine.dart';
 import 'fastfetch_widget.dart';
 
 class TerminalController extends ChangeNotifier {
+  static const int _maxOutputLines = 500;
+
   final CommandRegistry registry;
 
   final List<Widget> outputLines = [];
@@ -18,17 +21,15 @@ class TerminalController extends ChangeNotifier {
   int _historyIndex = -1;
 
   final ScrollController scrollController = ScrollController();
+  Timer? _scrollDebounce;
 
-  Timer? _cursorTimer;
-  bool _cursorVisible = true;
-  bool get cursorVisible => _cursorVisible;
+  bool _waitingForExitConfirm = false;
+  bool get waitingForExitConfirm => _waitingForExitConfirm;
 
   final Map<String, List<Widget>> _easterEggs = buildEasterEggs();
 
-  // Commands that accept a filename as their first argument
   static const _fileCommands = {'cat', 'open'};
 
-  // All known filenames from the virtual FS (public + hidden)
   static final List<String> _allFiles = [
     'about.md',
     'skills.md',
@@ -38,24 +39,15 @@ class TerminalController extends ChangeNotifier {
     '.secret'
   ];
 
-  // Autocomplete suggestion state
   List<String> _suggestions = [];
   int _suggestionIndex = 0;
   String _currentInput = '';
 
-  TerminalController({required this.registry}) {
-    _cursorTimer = Timer.periodic(
-      Duration(milliseconds: TerminalConstants.cursorBlinkMs),
-      (_) {
-        _cursorVisible = !_cursorVisible;
-        notifyListeners();
-      },
-    );
-  }
+  TerminalController({required this.registry});
 
   @override
   void dispose() {
-    _cursorTimer?.cancel();
+    _scrollDebounce?.cancel();
     scrollController.dispose();
     super.dispose();
   }
@@ -63,14 +55,17 @@ class TerminalController extends ChangeNotifier {
   // ── Scroll ──────────────────────────────────────────────────────────────────
 
   void _scheduleScrollToBottom() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (scrollController.hasClients) {
-        scrollController.animateTo(
-          scrollController.position.maxScrollExtent,
-          duration: const Duration(milliseconds: 80),
-          curve: Curves.easeOut,
-        );
-      }
+    _scrollDebounce?.cancel();
+    _scrollDebounce = Timer(const Duration(milliseconds: 100), () {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (scrollController.hasClients) {
+          scrollController.animateTo(
+            scrollController.position.maxScrollExtent,
+            duration: const Duration(milliseconds: 80),
+            curve: Curves.easeOut,
+          );
+        }
+      });
     });
   }
 
@@ -78,12 +73,18 @@ class TerminalController extends ChangeNotifier {
 
   void appendLines(List<Widget> lines) {
     outputLines.addAll(lines);
+    if (outputLines.length > _maxOutputLines) {
+      outputLines.removeRange(0, outputLines.length - _maxOutputLines);
+    }
     notifyListeners();
     _scheduleScrollToBottom();
   }
 
   void appendLine(Widget line) {
     outputLines.add(line);
+    if (outputLines.length > _maxOutputLines) {
+      outputLines.removeRange(0, outputLines.length - _maxOutputLines);
+    }
     notifyListeners();
     _scheduleScrollToBottom();
   }
@@ -101,7 +102,41 @@ class TerminalController extends ChangeNotifier {
   }
 
   void _closeTab() {
-    web.window.close();
+    try {
+      web.window.close();
+    } catch (e) {
+      // Browser blocked close - message shown by handleExitConfirmation
+    }
+  }
+
+  void handleExitConfirmation(String input) {
+    if (!_waitingForExitConfirm) return;
+
+    _waitingForExitConfirm = false;
+    notifyListeners();
+
+    final response = input.trim().toLowerCase();
+
+    if (response.isEmpty || response == 'y') {
+      appendLine(
+        RichText(
+          text: TextSpan(
+            text:
+                'Cannot close browser tab - browsers prevent this for security.',
+            style: GruvboxText.body(color: GruvboxColors.yellow),
+          ),
+        ),
+      );
+      appendLine(
+        RichText(
+          text: TextSpan(
+            text: 'You can close this tab manually.',
+            style: GruvboxText.body(color: GruvboxColors.faded),
+          ),
+        ),
+      );
+      _closeTab();
+    }
   }
 
   // ── Input Handling ───────────────────────────────────────────────────────────
@@ -131,7 +166,17 @@ class TerminalController extends ChangeNotifier {
     }
 
     if (cmd == 'exit') {
-      _closeTab();
+      _waitingForExitConfirm = true;
+      notifyListeners();
+      appendLine(_buildPromptLine('exit'));
+      appendLine(
+        RichText(
+          text: TextSpan(
+            text: 'Are you sure you want to exit? (y/n): ',
+            style: GruvboxText.body(),
+          ),
+        ),
+      );
       return;
     }
 

@@ -124,14 +124,15 @@ class _LoadingScreenState extends State<LoadingScreen>
 
     return GestureDetector(
       onTap: () => setState(() => _skipRequested = true),
-      child: RawKeyboardListener(
-        focusNode: _skipFocus,
+      child: Focus(
         autofocus: true,
-        onKey: (event) {
-          if (event is RawKeyDownEvent &&
+        onKeyEvent: (node, event) {
+          if (event is KeyDownEvent &&
               event.logicalKey == LogicalKeyboardKey.enter) {
             setState(() => _skipRequested = true);
+            return KeyEventResult.handled;
           }
+          return KeyEventResult.ignored;
         },
         child: ColoredBox(
           color: GruvboxColors.bg_hard,

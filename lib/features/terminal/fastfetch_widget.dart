@@ -68,29 +68,29 @@ class FastfetchBuilder {
     '                                      ',
   ];
 
-  static List<String> get _infoLines => [
-        'visitor@portfolio',
-        '─────────────────────────────────',
-        'OS:        Flutter Web',
-        'Shell:     portfolio.sh',
-        'Name:      Aritra Sanyal',
-        'Role:      Flutter Developer',
-        'Location:  TODO_CITY',
-        'GitHub:    TODO_GITHUB',
-        'Skills:    Flutter · Dart · Firebase',
-        'Projects:  TODO_N shipped apps',
-        'Contact:   TODO_EMAIL',
-      ];
+  static const List<String> _infoLines = [
+    'visitor@portfolio',
+    '─────────────────────────────────',
+    'OS:        Flutter Web',
+    'Shell:     portfolio.sh',
+    'Name:      Aritra Sanyal',
+    'Role:      Flutter Developer',
+    'Location:  TODO_CITY',
+    'GitHub:    TODO_GITHUB',
+    'Skills:    Flutter · Dart · Firebase',
+    'Projects:  TODO_N shipped apps',
+    'Contact:   TODO_EMAIL',
+  ];
 
-  static List<Widget> buildLines() {
-    return [
-      FastfetchDisplay(
-        artRows: _artRows,
-        infoLines: _infoLines,
-        breakpoint: _breakpoint,
-      ),
-    ];
+  static FastfetchDisplay buildDisplay() {
+    return FastfetchDisplay(
+      artRows: _artRows,
+      infoLines: _infoLines,
+      breakpoint: _breakpoint,
+    );
   }
+
+  static List<Widget> buildLines() => [buildDisplay()];
 
   static List<Widget> buildFooter() => [
         const SizedBox(height: 8),

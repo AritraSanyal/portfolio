@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../config/colors.dart';
@@ -18,8 +17,6 @@ class CustomTerminalInput extends StatefulWidget {
 class _CustomTerminalInputState extends State<CustomTerminalInput> {
   late TextEditingController _textController;
   late FocusNode _focusNode;
-  Timer? _cursorTimer;
-  bool _cursorVisible = true;
 
   String _ghostSuffix = '';
   bool _skipGhostSuggest = false;
@@ -30,13 +27,6 @@ class _CustomTerminalInputState extends State<CustomTerminalInput> {
     _textController = TextEditingController();
     _focusNode = FocusNode();
 
-    _cursorTimer = Timer.periodic(
-      Duration(milliseconds: TerminalConstants.cursorBlinkMs),
-      (_) {
-        if (mounted) setState(() => _cursorVisible = !_cursorVisible);
-      },
-    );
-
     _textController.addListener(_onTextChanged);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -46,7 +36,6 @@ class _CustomTerminalInputState extends State<CustomTerminalInput> {
 
   @override
   void dispose() {
-    _cursorTimer?.cancel();
     _textController.removeListener(_onTextChanged);
     _textController.dispose();
     _focusNode.dispose();
@@ -102,6 +91,13 @@ class _CustomTerminalInputState extends State<CustomTerminalInput> {
   }
 
   void _submit(String value) {
+    if (widget.controller.waitingForExitConfirm) {
+      widget.controller.handleExitConfirmation(value);
+      _textController.clear();
+      _ghostSuffix = '';
+      setState(() {});
+      return;
+    }
     setState(() => _ghostSuffix = '');
     _textController.clear();
     widget.controller.handleInput(value);
