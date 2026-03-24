@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import '../../config/colors.dart';
 import '../../config/text_styles.dart';
+import '../../widgets/github_icon.dart';
 
 class ProjectCard extends StatelessWidget {
   final String name;
   final String date;
   final String desc;
   final String stack;
+  final String? githubUrl;
 
   const ProjectCard({
     super.key,
@@ -14,6 +16,7 @@ class ProjectCard extends StatelessWidget {
     required this.date,
     required this.desc,
     required this.stack,
+    this.githubUrl,
   });
 
   @override
@@ -39,7 +42,14 @@ class ProjectCard extends StatelessWidget {
                       .copyWith(fontWeight: FontWeight.bold),
                 ),
               ),
-              Text(date, style: GruvboxText.surface(size: 11)),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  GithubIcon(url: githubUrl),
+                  const SizedBox(width: 10),
+                  Text(date, style: GruvboxText.surface(size: 11)),
+                ],
+              ),
             ],
           ),
           const SizedBox(height: 10),

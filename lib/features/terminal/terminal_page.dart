@@ -456,6 +456,7 @@ class _TerminalPageState extends State<TerminalPage>
                       desc:
                           'Flutter + Gemini AI generating personalized ad copy from text prompts. 92% code reuse across Android & iOS, cut dev time by 40%.',
                       stack: 'Flutter · Dart · Gemini API · Firebase',
+                      githubUrl: 'https://github.com/AritraSanyal/imgtxtgen',
                     ),
                     SizedBox(height: 14),
                     ProjectCard(
@@ -464,6 +465,7 @@ class _TerminalPageState extends State<TerminalPage>
                       desc:
                           'Camera-based PPG tracking HR & SpO2 in real-time. Animated dashboard, PDF reports, mood logging, medication reminders. 15%+ accuracy improvement.',
                       stack: 'Flutter · Dart · Firebase · Signal Processing',
+                      githubUrl: 'https://github.com/AritraSanyal/mesure_app',
                     ),
                   ],
                 );
@@ -478,6 +480,7 @@ class _TerminalPageState extends State<TerminalPage>
                       desc:
                           'Flutter + Gemini AI generating personalized ad copy from text prompts. 92% code reuse across Android & iOS, cut dev time by 40%.',
                       stack: 'Flutter · Dart · Gemini API · Firebase',
+                      githubUrl: 'https://github.com/AritraSanyal/imgtxtgen',
                     ),
                   ),
                   SizedBox(width: 14),
@@ -488,6 +491,7 @@ class _TerminalPageState extends State<TerminalPage>
                       desc:
                           'Camera-based PPG tracking HR & SpO2 in real-time. Animated dashboard, PDF reports, mood logging, medication reminders. 15%+ accuracy improvement.',
                       stack: 'Flutter · Dart · Firebase · Signal Processing',
+                      githubUrl: 'https://github.com/AritraSanyal/mesure_app',
                     ),
                   ),
                 ],
@@ -519,7 +523,7 @@ class _TerminalPageState extends State<TerminalPage>
           LayoutBuilder(
             builder: (context, constraints) {
               if (constraints.maxWidth < 900) {
-                return IntrinsicHeight(
+                return const IntrinsicHeight(
                   child: Column(
                     children: [
                       Expanded(
@@ -532,7 +536,7 @@ class _TerminalPageState extends State<TerminalPage>
                                 url: 'mailto:aritra.sanyal.official@gmail.com',
                               ),
                             ),
-                            const SizedBox(width: 12),
+                            SizedBox(width: 12),
                             Expanded(
                               child: ContactCard(
                                 label: 'PHONE',
@@ -542,7 +546,7 @@ class _TerminalPageState extends State<TerminalPage>
                           ],
                         ),
                       ),
-                      const SizedBox(height: 12),
+                      SizedBox(height: 12),
                       Expanded(
                         child: Row(
                           children: [
@@ -553,7 +557,7 @@ class _TerminalPageState extends State<TerminalPage>
                                 url: 'https://github.com/AritraSanyal',
                               ),
                             ),
-                            const SizedBox(width: 12),
+                            SizedBox(width: 12),
                             Expanded(
                               child: ContactCard(
                                 label: 'LOCATION',
