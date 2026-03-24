@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../config/colors.dart';
 import '../../config/text_styles.dart';
+import '../../widgets/github_icon.dart';
 
 class ProjectCard extends StatefulWidget {
   final String name;
@@ -96,12 +97,18 @@ class _ProjectCardState extends State<ProjectCard> {
               const SizedBox(height: 10),
               Text(widget.desc, style: GruvboxText.description()),
               const SizedBox(height: 10),
-              Text(
-                widget.stack,
-                style: GruvboxText.body(
-                  color: GruvboxColors.cyan,
-                  size: 11,
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    widget.stack,
+                    style: GruvboxText.body(
+                      color: GruvboxColors.cyan,
+                      size: 11,
+                    ),
+                  ),
+                  GithubIcon(url: widget.githubUrl, size: 20),
+                ],
               ),
               const SizedBox(height: 12),
             ],
