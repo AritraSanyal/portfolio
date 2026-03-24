@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../config/colors.dart';
 
 class GithubIcon extends StatelessWidget {
   final String? url;
@@ -9,7 +9,7 @@ class GithubIcon extends StatelessWidget {
   const GithubIcon({
     super.key,
     this.url,
-    this.size = 18,
+    this.size = 24,
   });
 
   @override
@@ -18,9 +18,14 @@ class GithubIcon extends StatelessWidget {
 
     return GestureDetector(
       onTap: () => _launchUrl(url!),
-      child: CustomPaint(
-        size: Size(size, size),
-        painter: _GithubPainter(color: GruvboxColors.yellow),
+      child: SvgPicture.asset(
+        'assets/github-svgrepo-com.svg',
+        width: size,
+        height: size,
+        colorFilter: const ColorFilter.mode(
+          Colors.white,
+          BlendMode.srcIn,
+        ),
       ),
     );
   }
@@ -31,160 +36,4 @@ class GithubIcon extends StatelessWidget {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
     }
   }
-}
-
-class _GithubPainter extends CustomPainter {
-  final Color color;
-
-  _GithubPainter({required this.color});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = color
-      ..style = PaintingStyle.fill;
-
-    final path = Path();
-    final w = size.width;
-    final h = size.height;
-
-    path.moveTo(w * 0.35, h * 0.0);
-    path.cubicTo(
-      w * 0.15,
-      h * 0.0,
-      w * 0.0,
-      h * 0.15,
-      w * 0.0,
-      h * 0.35,
-    );
-    path.cubicTo(
-      w * 0.0,
-      h * 0.48,
-      w * 0.08,
-      h * 0.58,
-      w * 0.15,
-      h * 0.58,
-    );
-    path.cubicTo(
-      w * 0.19,
-      h * 0.58,
-      w * 0.25,
-      h * 0.52,
-      w * 0.25,
-      h * 0.42,
-    );
-    path.cubicTo(
-      w * 0.25,
-      h * 0.25,
-      w * 0.35,
-      h * 0.25,
-      w * 0.35,
-      h * 0.25,
-    );
-    path.cubicTo(
-      w * 0.35,
-      h * 0.25,
-      w * 0.45,
-      h * 0.25,
-      w * 0.45,
-      h * 0.42,
-    );
-    path.cubicTo(
-      w * 0.45,
-      h * 0.52,
-      w * 0.51,
-      h * 0.58,
-      w * 0.55,
-      h * 0.58,
-    );
-    path.cubicTo(
-      w * 0.62,
-      h * 0.58,
-      w * 0.7,
-      h * 0.48,
-      w * 0.7,
-      h * 0.35,
-    );
-    path.cubicTo(
-      w * 0.7,
-      h * 0.15,
-      w * 0.55,
-      h * 0.0,
-      w * 0.35,
-      h * 0.0,
-    );
-    path.close();
-
-    path.moveTo(w * 0.5, h * 0.65);
-    path.cubicTo(
-      w * 0.45,
-      h * 0.55,
-      w * 0.35,
-      h * 0.55,
-      w * 0.3,
-      h * 0.65,
-    );
-    path.cubicTo(
-      w * 0.25,
-      h * 0.75,
-      w * 0.3,
-      h * 0.85,
-      w * 0.42,
-      h * 0.95,
-    );
-    path.cubicTo(
-      w * 0.58,
-      h * 1.05,
-      w * 0.7,
-      h * 0.95,
-      w * 0.75,
-      h * 0.85,
-    );
-    path.cubicTo(
-      w * 0.8,
-      h * 0.75,
-      w * 0.75,
-      h * 0.65,
-      w * 0.7,
-      h * 0.65,
-    );
-    path.cubicTo(
-      w * 0.65,
-      h * 0.65,
-      w * 0.63,
-      h * 0.75,
-      w * 0.58,
-      h * 0.82,
-    );
-    path.cubicTo(
-      w * 0.55,
-      h * 0.88,
-      w * 0.52,
-      h * 0.82,
-      w * 0.5,
-      h * 0.72,
-    );
-    path.cubicTo(
-      w * 0.48,
-      h * 0.82,
-      w * 0.45,
-      h * 0.88,
-      w * 0.42,
-      h * 0.82,
-    );
-    path.cubicTo(
-      w * 0.37,
-      h * 0.75,
-      w * 0.35,
-      h * 0.65,
-      w * 0.5,
-      h * 0.65,
-    );
-    path.close();
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
