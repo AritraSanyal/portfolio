@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../config/colors.dart';
 import '../../config/text_styles.dart';
-import '../../widgets/github_icon.dart';
 
 class ProjectCard extends StatefulWidget {
   final String name;
@@ -39,65 +39,73 @@ class _ProjectCardState extends State<ProjectCard> {
     ),
   ];
 
+  Future<void> _launchUrl(String url) async {
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
-      cursor: SystemMouseCursors.click,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 150),
-        curve: Curves.easeOut,
-        transform: Matrix4.translationValues(0, _isHovered ? -4.0 : 0.0, 0.0),
-        transformAlignment: Alignment.topCenter,
-        padding:
-            const EdgeInsets.only(top: 22, bottom: 22, left: 24, right: 24),
-        decoration: BoxDecoration(
-          color: GruvboxColors.bg,
-          border: Border.all(
-            color: _isHovered ? GruvboxColors.yellow : GruvboxColors.overlay,
-            width: _isHovered ? 2 : 1,
+      cursor: widget.githubUrl != null
+          ? SystemMouseCursors.click
+          : MouseCursor.defer,
+      child: GestureDetector(
+        onTap: widget.githubUrl != null
+            ? () => _launchUrl(widget.githubUrl!)
+            : null,
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 150),
+          curve: Curves.easeOut,
+          transform: Matrix4.translationValues(0, _isHovered ? -4.0 : 0.0, 0.0),
+          transformAlignment: Alignment.topCenter,
+          padding:
+              const EdgeInsets.only(top: 22, bottom: 22, left: 24, right: 24),
+          decoration: BoxDecoration(
+            color: GruvboxColors.bg,
+            border: Border.all(
+              color: _isHovered ? GruvboxColors.yellow : GruvboxColors.overlay,
+              width: _isHovered ? 2 : 1,
+            ),
+            borderRadius: BorderRadius.circular(8),
+            boxShadow: _isHovered ? _hoverShadows : null,
           ),
-          borderRadius: BorderRadius.circular(8),
-          boxShadow: _isHovered ? _hoverShadows : null,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Text(
-                    widget.name,
-                    style: GruvboxText.body(
-                      color: GruvboxColors.yellow,
-                      size: 14,
-                    ).copyWith(fontWeight: FontWeight.bold),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Text(
+                      widget.name,
+                      style: GruvboxText.body(
+                        color: GruvboxColors.yellow,
+                        size: 14,
+                      ).copyWith(fontWeight: FontWeight.bold),
+                    ),
                   ),
+                  Text(widget.date, style: GruvboxText.surface(size: 11)),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Text(widget.desc, style: GruvboxText.description()),
+              const SizedBox(height: 10),
+              Text(
+                widget.stack,
+                style: GruvboxText.body(
+                  color: GruvboxColors.cyan,
+                  size: 11,
                 ),
-                Text(widget.date, style: GruvboxText.surface(size: 11)),
-              ],
-            ),
-            const SizedBox(height: 10),
-            Text(widget.desc, style: GruvboxText.description()),
-            const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  widget.stack,
-                  style: GruvboxText.body(
-                    color: GruvboxColors.cyan,
-                    size: 11,
-                  ),
-                ),
-                GithubIcon(url: widget.githubUrl, size: 20),
-              ],
-            ),
-            const SizedBox(height: 12),
-          ],
+              ),
+              const SizedBox(height: 12),
+            ],
+          ),
         ),
       ),
     );
