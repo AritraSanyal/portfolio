@@ -10,6 +10,7 @@ class ProjectCard extends StatefulWidget {
   final String desc;
   final String stack;
   final String? githubUrl;
+  final String? tag;
 
   const ProjectCard({
     super.key,
@@ -18,6 +19,7 @@ class ProjectCard extends StatefulWidget {
     required this.desc,
     required this.stack,
     this.githubUrl,
+    this.tag,
   });
 
   @override
@@ -81,14 +83,47 @@ class _ProjectCardState extends State<ProjectCard> {
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
-                    child: Text(
-                      widget.name,
-                      style: GruvboxText.body(
-                        color: GruvboxColors.yellow,
-                        size: 14,
-                      ).copyWith(fontWeight: FontWeight.bold),
+                    child: Row(
+                      children: [
+                        Flexible(
+                          child: Text(
+                            widget.name,
+                            style: GruvboxText.body(
+                              color: GruvboxColors.yellow,
+                              size: 14,
+                            ).copyWith(fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        if (widget.tag != null) ...[
+                          const SizedBox(width: 8),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 6,
+                              vertical: 2,
+                            ),
+                            decoration: BoxDecoration(
+                              color:
+                                  GruvboxColors.yellow.withValues(alpha: 0.2),
+                              borderRadius: BorderRadius.circular(4),
+                              border: Border.all(
+                                color:
+                                    GruvboxColors.yellow.withValues(alpha: 0.5),
+                                width: 1,
+                              ),
+                            ),
+                            child: Text(
+                              widget.tag!,
+                              style: GruvboxText.body(
+                                color: GruvboxColors.yellow,
+                                size: 9,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ],
                     ),
                   ),
                   Text(widget.date, style: GruvboxText.surface(size: 11)),

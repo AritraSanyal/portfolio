@@ -467,6 +467,25 @@ class _TerminalPageState extends State<TerminalPage>
                       stack: 'Flutter · Dart · Firebase · Signal Processing',
                       githubUrl: 'https://github.com/AritraSanyal/mesure_app',
                     ),
+                    SizedBox(height: 32),
+                    Text(
+                      'Under Development',
+                      style: TextStyle(
+                        color: Color(0xFF928374),
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    SizedBox(height: 14),
+                    ProjectCard(
+                      name: 'Musix — Music Streaming App',
+                      date: '',
+                      desc:
+                          'Music streaming app with Flutter frontend + Dart Frog backend. Features playback controls, playlists, favorites, dark/light theme, offline caching.',
+                      stack: 'Flutter · Dart · Dart Frog · JWT Auth',
+                      githubUrl: 'https://github.com/AritraSanyal/musix',
+                      tag: 'Under Dev',
+                    ),
                   ],
                 );
               }
@@ -474,24 +493,45 @@ class _TerminalPageState extends State<TerminalPage>
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
-                    child: ProjectCard(
-                      name: 'Advertisement Generation App',
-                      date: 'Aug 2024',
-                      desc:
-                          'Flutter + Gemini AI generating personalized ad copy from text prompts. 92% code reuse across Android & iOS, cut dev time by 40%.',
-                      stack: 'Flutter · Dart · Gemini API · Firebase',
-                      githubUrl: 'https://github.com/AritraSanyal/imgtxtgen',
+                    child: Column(
+                      children: [
+                        ProjectCard(
+                          name: 'Advertisement Generation App',
+                          date: 'Aug 2024',
+                          desc:
+                              'Flutter + Gemini AI generating personalized ad copy from text prompts. 92% code reuse across Android & iOS, cut dev time by 40%.',
+                          stack: 'Flutter · Dart · Gemini API · Firebase',
+                          githubUrl:
+                              'https://github.com/AritraSanyal/imgtxtgen',
+                        ),
+                        SizedBox(height: 14),
+                        ProjectCard(
+                          name: 'Musix — Music Streaming App',
+                          date: '',
+                          desc:
+                              'Music streaming app with Flutter frontend + Dart Frog backend. Features playback controls, playlists, favorites, dark/light theme, offline caching.',
+                          stack: 'Flutter · Dart · Dart Frog · JWT Auth',
+                          githubUrl: 'https://github.com/AritraSanyal/musix',
+                          tag: 'Under Dev',
+                        ),
+                      ],
                     ),
                   ),
                   SizedBox(width: 14),
                   Expanded(
-                    child: ProjectCard(
-                      name: 'Mesure — Health App',
-                      date: 'Jan 2025',
-                      desc:
-                          'Camera-based PPG tracking HR & SpO2 in real-time. Animated dashboard, PDF reports, mood logging, medication reminders. 15%+ accuracy improvement.',
-                      stack: 'Flutter · Dart · Firebase · Signal Processing',
-                      githubUrl: 'https://github.com/AritraSanyal/mesure_app',
+                    child: Column(
+                      children: [
+                        ProjectCard(
+                          name: 'Mesure — Health App',
+                          date: 'Jan 2025',
+                          desc:
+                              'Camera-based PPG tracking HR & SpO2 in real-time. Animated dashboard, PDF reports, mood logging, medication reminders. 15%+ accuracy improvement.',
+                          stack:
+                              'Flutter · Dart · Firebase · Signal Processing',
+                          githubUrl:
+                              'https://github.com/AritraSanyal/mesure_app',
+                        ),
+                      ],
                     ),
                   ),
                 ],
